@@ -1,10 +1,10 @@
 import React from 'react';
 
-type Props = {
+type HeroSectionProps = {
   onRequestQuote: () => void;
 };
 
-export default function HeroSection({ onRequestQuote }: Props) {
+export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
   return (
     <section className="border-b border-slate-200 bg-gradient-to-b from-slate-900/5 to-transparent">
       <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-12 md:grid-cols-[1.35fr_0.65fr]">

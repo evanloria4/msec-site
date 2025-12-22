@@ -1,39 +1,27 @@
+// src/client/App.tsx
 import React, { useMemo, useState } from "react";
+import HeroSection from "./components/HeroSection";
+import AboutSection from "./components/AboutSection";
+import ServicesSection from "./components/ServicesSection";
+import LocationsSection from "./components/LocationsSection";
+import ContactSection from "./components/ContactSection";
 
-type Service = { title: string; bullets: string[] };
-type Location = { name: string; note?: string };
+type Service = {
+  title: string;
+  bullets: string[];
+};
 
-const content = {
-  brand: {
-    name: "Mechanical Specialties LLC",
-    tagline: "Electrical Contracting & Mechanical Services",
-    phoneDisplay: "(985) 123-4567",
-    phoneHref: "tel:+19851234567",
-  },
-  hero: {
-    headline: "Electrical & Mechanical Services You Can Rely On",
-    subheadline:
-      "Based in Covington, Louisiana with branch operations across the region — serving residential and commercial clients since ~2013.",
-    primaryCta: "Request a Quote",
-    secondaryCta: "Call Now",
-    trust: ["Licensed & Insured", "Residential + Commercial", "10+ Years Experience"],
-  },
-  about: {
-    title: "About",
-    paragraphs: [
-      "Mechanical Specialties LLC is a trusted electrical contracting and mechanical services company based in Covington, Louisiana, with branch operations in Hammond, Baton Rouge, Broussard, Shreveport, and Gulfport, Mississippi.",
-      "Serving both residential and commercial clients across multiple states, Mechanical Specialties has built a strong reputation for quality workmanship, reliable service, and responsive project delivery.",
-    ],
-  },
-  servicesTitle: "Services",
-  locationsTitle: "Locations",
-  contact: {
-    title: "Request a Quote",
-    helper: "Tell us what you need and we’ll follow up quickly with next steps.",
-  },
-  footer: {
-    line: "Serving Louisiana & the Gulf Coast",
-  },
+type Location = {
+  name: string;
+  note?: string;
+};
+
+type ContactFormState = {
+  name: string;
+  phone: string;
+  email: string;
+  service: string;
+  message: string;
 };
 
 export default function App() {
@@ -67,7 +55,7 @@ export default function App() {
     []
   );
 
-  const [form, setForm] = useState({
+  const [contactFormState, setContactFormState] = useState<ContactFormState>({
     name: "",
     phone: "",
     email: "",
@@ -75,22 +63,25 @@ export default function App() {
     message: "",
   });
 
-  function scrollTo(id: string) {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  function scrollToSection(sectionId: string) {
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  function onChange(
-    element: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
+  function handleContactFieldChange(
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) {
-    const { name, value } = element.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    const { name, value } = event.target;
+    setContactFormState((previousState) => ({
+      ...previousState,
+      [name]: value,
+    }));
   }
 
-  function onSubmit(element: React.FormEvent) {
-    e.preventDefault();
-    // Frontend-only for now.
+  function handleContactFormSubmit(event: React.FormEvent) {
+    event.preventDefault();
     alert("Submitted (mock). We’ll wire this to the API later.");
-    setForm({
+
+    setContactFormState({
       name: "",
       phone: "",
       email: "",
@@ -98,9 +89,83 @@ export default function App() {
       message: "",
     });
   }
+
   return (
-    <div>
-      Hello World!
+    <div className="min-h-screen bg-white text-slate-900">
+      {/* Header (kept in App) */}
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+          <button
+            className="flex items-center gap-3 text-left"
+            onClick={() => scrollToSection("top")}
+            aria-label="Back to top"
+          >
+            <div className="h-9 w-9 rounded-xl bg-slate-900" />
+            <div>
+              <div className="font-extrabold leading-tight">Mechanical Specialties LLC</div>
+              <div className="text-xs text-slate-600">
+                Electrical Contracting & Mechanical Services
+              </div>
+            </div>
+          </button>
+
+          <nav className="hidden items-center gap-2 md:flex">
+            <button
+              className="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100"
+              onClick={() => scrollToSection("about")}
+            >
+              About
+            </button>
+            <button
+              className="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100"
+              onClick={() => scrollToSection("services")}
+            >
+              Services
+            </button>
+            <button
+              className="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100"
+              onClick={() => scrollToSection("locations")}
+            >
+              Locations
+            </button>
+            <button
+              className="rounded-lg bg-slate-900 px-3 py-2 font-bold text-white hover:opacity-95"
+              onClick={() => scrollToSection("contact")}
+            >
+              Request a Quote
+            </button>
+          </nav>
+
+          <a
+            className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-bold hover:bg-slate-50"
+            href="tel:+19851234567"
+          >
+            (985) 123-4567
+          </a>
+        </div>
+      </header>
+
+      <main id="top">
+        <HeroSection onRequestQuote={() => scrollToSection("contact")} />
+        <AboutSection />
+        <ServicesSection services={services} />
+        <LocationsSection locations={locations} />
+
+        <ContactSection
+          services={services}
+          contactFormState={contactFormState}
+          onFieldChange={handleContactFieldChange}
+          onFormSubmit={handleContactFormSubmit}
+        />
+
+        {/* Footer (kept in App for now) */}
+        <footer className="bg-slate-900 py-8 text-white">
+          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4">
+            <div className="font-bold">© {new Date().getFullYear()} Mechanical Specialties LLC</div>
+            <div className="text-sm text-white/80">Serving Louisiana & the Gulf Coast</div>
+          </div>
+        </footer>
+      </main>
     </div>
   );
 }
