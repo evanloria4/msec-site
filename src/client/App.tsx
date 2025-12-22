@@ -80,8 +80,6 @@ export default function App() {
 
   function handleContactFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-    alert("Submitted (mock). We’ll wire this to the API later.");
-    console.log("Form data:", contactFormState);
       axios.post("/api/contact", contactFormState).catch((error) => {
       console.error("Error submitting contact form:", error);
     })
