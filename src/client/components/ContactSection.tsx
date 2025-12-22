@@ -34,7 +34,7 @@ export default function ContactSection({
     <section id="contact" className="border-y border-slate-200 bg-slate-50 py-12">
       <div className="mx-auto max-w-6xl px-4">
         <h2 className="text-2xl font-extrabold tracking-tight">
-          Request a Quote
+          Request Service
         </h2>
 
         <form
@@ -131,7 +131,7 @@ export default function ContactSection({
                 className="font-extrabold text-slate-900"
                 href="tel:+19851234567"
               >
-                (985) 123-4567
+                (985) 249-5765
               </a>
             </div>
           </div>

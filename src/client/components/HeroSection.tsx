@@ -39,12 +39,9 @@ export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
                 onClick={onRequestQuote}
                 className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm hover:bg-orange-400"
               >
-                Request a Quote
+                Request Service
               </button>
 
-              <div className="rounded-md bg-blue-900 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm">
-                Call Now
-              </div>
             </div>
           </div>
         </div>

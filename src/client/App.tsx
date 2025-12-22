@@ -80,7 +80,7 @@ export default function App() {
   function handleContactFormSubmit(event: React.FormEvent) {
     event.preventDefault();
     alert("Submitted (mock). We’ll wire this to the API later.");
-
+    console.log("Form data:", contactFormState);
     setContactFormState({
       name: "",
       phone: "",
@@ -92,58 +92,33 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      {/* Header (kept in App) */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
+      <header className="sticky top-0 z-50 bg-blue-950 text-white shadow border-b border-white/10">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+          {/* Logo / Brand */}
           <button
             className="flex items-center gap-3 text-left"
             onClick={() => scrollToSection("top")}
             aria-label="Back to top"
           >
-            <div className="h-9 w-9 rounded-xl bg-slate-900" />
+            <div className="h-9 w-9 rounded-xl bg-white/15" />
             <div>
-              <div className="font-extrabold leading-tight">Mechanical Specialties LLC</div>
-              <div className="text-xs text-slate-600">
+              <div className="font-extrabold leading-tight">
+                Mechanical Specialties LLC
+              </div>
+              <div className="text-xs text-white/80">
                 Electrical Contracting & Mechanical Services
               </div>
             </div>
           </button>
 
-          <nav className="hidden items-center gap-2 md:flex">
-            <button
-              className="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100"
-              onClick={() => scrollToSection("about")}
-            >
-              About
-            </button>
-            <button
-              className="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100"
-              onClick={() => scrollToSection("services")}
-            >
-              Services
-            </button>
-            <button
-              className="rounded-lg px-3 py-2 font-semibold hover:bg-slate-100"
-              onClick={() => scrollToSection("locations")}
-            >
-              Locations
-            </button>
-            <button
-              className="rounded-lg bg-slate-900 px-3 py-2 font-bold text-white hover:opacity-95"
-              onClick={() => scrollToSection("contact")}
-            >
-              Request a Quote
-            </button>
-          </nav>
-
-          <a
-            className="rounded-lg border border-slate-200 px-3 py-2 text-sm font-bold hover:bg-slate-50"
-            href="tel:+19851234567"
-          >
-            (985) 123-4567
-          </a>
+          {/* Phone number (plain text, top right) */}
+          <div className="flex items-center gap-2 text-sm font-semibold text-white/90">
+            <span aria-hidden>📞</span>
+            <span>(985) 249-5765</span>
+          </div>
         </div>
       </header>
+
 
       <main id="top">
         <HeroSection onRequestQuote={() => scrollToSection("contact")} />
