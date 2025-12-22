@@ -1,14 +1,34 @@
-const { Router } = require('express');
+import { Router, Request, Response } from "express";
 
-// Create a router for contact-related routes
 export const contactRouter = Router();
 
-// For POST reqs to '/api/contact', handle contact form submissions
-contactRouter.post('/', (req, res) => {
-    // Extract form data from the request body
-    const { name, phone, email, service, message } = req.body;
-});
-
-module.exports = {
-  contactRouter,
+type ContactRequestBody = {
+  name?: string;
+  phone?: string;
+  email?: string;
+  service?: string;
+  message?: string;
 };
+
+// Handle POST requests to /api/contact
+contactRouter.post("/", async (request: Request, response: Response) => {
+  const requestBody = request.body as ContactRequestBody;
+
+  const name = (requestBody.name ?? "").trim();
+  const phone = (requestBody.phone ?? "").trim();
+  const email = (requestBody.email ?? "").trim();
+  const service = (requestBody.service ?? "").trim();
+  const message = (requestBody.message ?? "").trim();
+
+  if (!name || !email || !service) {
+    return response.status(400).json({
+      ok: false,
+      error: "Missing required fields: name, email, service",
+    });
+  }
+
+  // TODO: send email here (nodemailer / sendgrid / postmark)
+  console.log("New contact submission:", { name, phone, email, service, message });
+
+  return response.status(200).json({ ok: true });
+});

@@ -1,5 +1,6 @@
 // src/client/App.tsx
 import React, { useMemo, useState } from "react";
+import axios from "axios";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
@@ -81,6 +82,9 @@ export default function App() {
     event.preventDefault();
     alert("Submitted (mock). We’ll wire this to the API later.");
     console.log("Form data:", contactFormState);
+      axios.post("/api/contact", contactFormState).catch((error) => {
+      console.error("Error submitting contact form:", error);
+    })
     setContactFormState({
       name: "",
       phone: "",
