@@ -1,69 +1,50 @@
 import React from 'react';
+import heroBackgroundImageUrl from '../assets/hero.jpg';
 
 type HeroSectionProps = {
   onRequestQuote: () => void;
 };
 
 export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
+  console.log(heroBackgroundImageUrl)
   return (
-    <section className="border-b border-slate-200 bg-gradient-to-b from-slate-900/5 to-transparent">
-      <div className="mx-auto grid max-w-6xl grid-cols-1 gap-6 px-4 py-12 md:grid-cols-[1.35fr_0.65fr]">
-        <div>
-          <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl">
-            Electrical & Mechanical Services You Can Rely On
-          </h1>
-          <p className="mt-4 max-w-2xl text-base leading-7 text-slate-700">
-            Trusted electrical contracting and mechanical services based in Covington, Louisiana
-            with branch operations in Hammond, Baton Rouge, Broussard, Shreveport, and Gulfport,
-            Mississippi. Serving residential and commercial clients since approximately 2013.
-          </p>
+    <section className="relative w-full overflow-hidden">
+      {/* Background image */}
+      <div
+        className="h-[160px] w-full bg-cover bg-center sm:h-[190px] md:h-[220px]"
+        style={{ backgroundImage: `url(${heroBackgroundImageUrl})` }}
+        aria-label="Hero background"
+      />
 
-          <div className="mt-5 flex flex-wrap gap-3">
-            <button
-              className="rounded-xl bg-slate-900 px-4 py-3 font-extrabold text-white hover:opacity-95"
-              onClick={onRequestQuote}
-            >
-              Request a Quote
-            </button>
-            <a
-              className="rounded-xl border border-slate-300 bg-white px-4 py-3 font-extrabold text-slate-900 hover:bg-slate-50"
-              href="tel:+19851234567"
-            >
-              Call Now
-            </a>
-          </div>
+      {/* Dark overlay (left-heavy like your screenshot) */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/10" />
 
-          <div className="mt-6 flex flex-wrap gap-2">
-            <span className="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold">
-              Licensed & Insured
-            </span>
-            <span className="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold">
-              Residential + Commercial
-            </span>
-            <span className="rounded-full border border-slate-200 bg-white px-3 py-2 text-sm font-bold">
-              10+ Years Experience
-            </span>
-          </div>
-        </div>
+      {/* Content */}
+      <div className="absolute inset-0">
+        <div className="mx-auto flex h-full max-w-6xl items-center px-4">
+          <div className="max-w-[420px]">
+            <h1 className="text-[20px] font-extrabold leading-tight text-white sm:text-[22px] md:text-[26px]">
+              Electrical &amp; Mechanical Services
+              <br />
+              You Can Rely On
+            </h1>
 
-        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-          <div className="text-lg font-extrabold">
-            Fast Response. Clean Work. Clear Communication.
-          </div>
-          <p className="mt-2 text-sm leading-6 text-slate-600">
-            Tell us what you need and we’ll follow up quickly with next steps.
-          </p>
+            <p className="mt-2 text-[11px] font-semibold text-white/80 sm:text-[12px]">
+              Trusted Across Louisiana &amp; Gulf Coast Since 2013.
+            </p>
 
-          <button
-            className="mt-3 w-full rounded-xl bg-slate-900 px-4 py-3 font-extrabold text-white hover:opacity-95"
-            onClick={onRequestQuote}
-          >
-            Start a Request
-          </button>
+            <div className="mt-3 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={onRequestQuote}
+                className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm hover:bg-orange-400"
+              >
+                Request a Quote
+              </button>
 
-          <div className="mt-4 overflow-hidden rounded-xl border border-slate-200">
-            <div className="flex h-36 items-center justify-center bg-slate-50 text-sm font-bold text-slate-500">
-              HERO IMAGE PLACEHOLDER
+              <div className="rounded-md bg-blue-900 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm">
+                Call Now
+              </div>
             </div>
           </div>
         </div>
