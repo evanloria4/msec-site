@@ -1,6 +1,7 @@
 import express from 'express';
 import path from 'path';
 import cors from 'cors';
+import { contactRouter } from './routes/contact';
 
 const DIST_DIR = path.resolve(__dirname, '..', '..', 'dist');
 
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* ---------------- Routes ---------------- */
+app.use('/api/contact', contactRouter );
 
 // Serve static files from the dist directory 
 app.use(express.static(DIST_DIR));
