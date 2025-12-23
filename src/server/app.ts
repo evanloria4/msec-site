@@ -20,7 +20,7 @@ app.use(express.static(DIST_DIR));
 
 // SPA fallback (LAST)
 app.get(/^(?!\/api\/).*/, (req, res) => {
-  res.sendFile(path.join(DIST_DIR, "bundle.js"));
+  res.sendFile(path.join(DIST_DIR, "index.html"));
 });
 
 export default app;
