@@ -18,4 +18,9 @@ app.use('/api/contact', contactRouter );
 // Serve static files from the dist directory 
 app.use(express.static(DIST_DIR));
 
+// SPA fallback (LAST)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(DIST_DIR, "index.html"));
+});
+
 export default app;
