@@ -123,7 +123,7 @@ export default function App() {
       </header>
 
 
-      <main id="top">
+      <main>
         <HeroSection onRequestQuote={() => scrollToSection("contact")} />
         <AboutSection />
         <ServicesSection services={services} />
