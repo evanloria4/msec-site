@@ -12,6 +12,20 @@ type ContactRequestBody = {
   message?: string;
 };
 
+function formatPhoneNumber(rawPhoneNumber: string): string {
+  const digitsOnly = rawPhoneNumber.replace(/\D/g, "");
+
+  if (digitsOnly.length !== 10) {
+    return rawPhoneNumber; // fallback if unexpected format
+  }
+
+  const areaCode = digitsOnly.slice(0, 3);
+  const prefix = digitsOnly.slice(3, 6);
+  const lineNumber = digitsOnly.slice(6);
+
+  return `(${areaCode}) ${prefix}-${lineNumber}`;
+}
+
 async function sendContactEmail(params: {
   name: string;
   phone: string;
@@ -38,7 +52,7 @@ async function sendContactEmail(params: {
     `New contact request received:\n\n` +
     `Name: ${params.name}\n` +
     `Email: ${params.email}\n` +
-    `Phone: ${params.phone || "Not provided"}\n` +
+    `Phone: ${formatPhoneNumber(params.phone) || "Not provided"}\n` +
     `Service: ${params.service}\n\n` +
     `Message:\n${params.message}`;
 
