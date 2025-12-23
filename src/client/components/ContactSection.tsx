@@ -68,10 +68,15 @@ export default function ContactSection({
               </label>
               <input
                 className="mt-2 w-full rounded-xl border border-slate-300 px-3 py-3 outline-none focus:border-slate-900"
+                type="tel"
                 name="phone"
                 value={contactFormState.phone}
                 onChange={onFieldChange}
-                placeholder="(985) 555-1234"
+                required
+                minLength={10}
+                maxLength={10}
+                autoComplete="tel"
+                placeholder="9852495765"
               />
             </div>
 
