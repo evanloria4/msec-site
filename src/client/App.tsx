@@ -55,7 +55,8 @@ export default function App() {
     ],
     []
   );
-
+  // Set statwe for turnstile token and contact form
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
   const [contactFormState, setContactFormState] = useState<ContactFormState>({
     name: "",
     phone: "",
@@ -80,7 +81,7 @@ export default function App() {
 
   function handleContactFormSubmit(event: React.FormEvent) {
     event.preventDefault();
-      axios.post("/api/contact", contactFormState).catch((error) => {
+    axios.post("/api/contact", contactFormState).catch((error) => {
       console.error("Error submitting contact form:", error);
     })
     setContactFormState({
@@ -131,6 +132,8 @@ export default function App() {
         <ContactSection
           services={services}
           contactFormState={contactFormState}
+          turnstileToken={turnstileToken}
+          onTurnstileTokenChange={setTurnstileToken}
           onFieldChange={handleContactFieldChange}
           onFormSubmit={handleContactFormSubmit}
         />

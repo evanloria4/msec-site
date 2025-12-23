@@ -1,4 +1,5 @@
 import React from "react";
+import TurnstileWidget from "./TurnstileWidget";
 
 type Service = {
   title: string;
@@ -16,6 +17,8 @@ type ContactFormState = {
 type ContactSectionProps = {
   services: Service[];
   contactFormState: ContactFormState;
+  turnstileToken: string;
+  onTurnstileTokenChange: (token: string) => void;
   onFieldChange: (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -24,9 +27,12 @@ type ContactSectionProps = {
   onFormSubmit: (event: React.FormEvent) => void;
 };
 
+
 export default function ContactSection({
   services,
   contactFormState,
+  turnstileToken,
+  onTurnstileTokenChange,
   onFieldChange,
   onFormSubmit,
 }: ContactSectionProps) {
@@ -116,11 +122,16 @@ export default function ContactSection({
               placeholder="Tell us about the project..."
             />
           </div>
-
+          <div className="mt-4">
+            <TurnstileWidget
+              siteKey="YOUR_TURNSTILE_SITE_KEY"
+              onTokenChange={onTurnstileTokenChange}
+            />
+          </div>
           <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
             <button
               type="submit"
-              className="rounded-xl bg-slate-900 px-4 py-3 font-extrabold text-white hover:opacity-95"
+              className="rounded-xl px-4 py-3 font-extrabold text-white bg-slate-900 hover:opacity-95"
             >
               Send Request
             </button>
