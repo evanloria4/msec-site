@@ -100,7 +100,6 @@ export default function App() {
           {/* Logo / Brand */}
           <button
             className="flex items-center gap-3 text-left"
-            onClick={() => scrollToSection("top")}
             aria-label="Back to top"
           >
             <div className="h-9 w-9 rounded-xl bg-white/15" />
@@ -123,7 +122,7 @@ export default function App() {
       </header>
 
 
-      <main>
+      <main id="top">
         <HeroSection onRequestQuote={() => scrollToSection("contact")} />
         <AboutSection />
         <ServicesSection services={services} />
