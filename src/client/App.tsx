@@ -114,7 +114,7 @@ export default function App() {
           </button>
 
           {/* Phone number (plain text, top right) */}
-          <div className="flex items-center gap-2 text-sm font-semibold text-white/90">
+          <div className="hidden sm:flex items-center gap-2 text-sm font-semibold text-white/90">
             <span aria-hidden>📞</span>
             <span>(985) 249-5765</span>
           </div>
