@@ -1,5 +1,5 @@
 // src/client/App.tsx
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import axios from "axios";
 import HeroSection from "./components/HeroSection";
 import AboutSection from "./components/AboutSection";
@@ -25,7 +25,21 @@ type ContactFormState = {
   message: string;
 };
 
+type ToastType = "success" | "error";
+
 export default function App() {
+  // State to manage toast notifications
+  const [toast, setToast] = useState<{ type: ToastType; message: string } | null>(null);
+  // Ref to store the toast timer ID for cleanup
+  const toastTimer = useRef<number | null>(null);
+  // State to manage contact form submission status
+  const [isSending, setIsSending] = useState(false);
+
+  function showToast(type: ToastType, message: string) {
+    setToast({ type, message });
+    if (toastTimer.current) window.clearTimeout(toastTimer.current);
+      toastTimer.current = window.setTimeout(() => setToast(null), 4000);
+}
   const services: Service[] = useMemo(
     () => [
       {
@@ -43,6 +57,15 @@ export default function App() {
     ],
     []
   );
+    // Set state for turnstile token and contact form
+  const [turnstileToken, setTurnstileToken] = useState<string>("");
+  const [contactFormState, setContactFormState] = useState<ContactFormState>({
+    name: "",
+    phone: "",
+    email: "",
+    service: services[0]?.title ?? "Electrical Contracting",
+    message: "",
+  });
 
   const locations: Location[] = useMemo(
     () => [
@@ -55,15 +78,6 @@ export default function App() {
     ],
     []
   );
-  // Set statwe for turnstile token and contact form
-  const [turnstileToken, setTurnstileToken] = useState<string>("");
-  const [contactFormState, setContactFormState] = useState<ContactFormState>({
-    name: "",
-    phone: "",
-    email: "",
-    service: services[0]?.title ?? "Electrical Contracting",
-    message: "",
-  });
 
   function scrollToSection(sectionId: string) {
     document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -79,11 +93,17 @@ export default function App() {
     }));
   }
 
-  function handleContactFormSubmit(event: React.FormEvent) {
-    event.preventDefault();
-    axios.post("/api/contact", contactFormState).catch((error) => {
-      console.error("Error submitting contact form:", error);
-    })
+async function handleContactFormSubmit(event: React.FormEvent) {
+  event.preventDefault();
+  if (isSending) return;
+
+  setIsSending(true);
+  try {
+    // Submit the form data to the backend API
+    await axios.post("/api/contact", contactFormState);
+    // Show success toast and reset form
+    showToast("success", "Thanks! Your request was submitted.");
+    // Empty the form and reset to default service
     setContactFormState({
       name: "",
       phone: "",
@@ -91,7 +111,15 @@ export default function App() {
       service: services[0]?.title ?? "Electrical Contracting",
       message: "",
     });
+  } catch (error) {
+    console.error("Error submitting contact form:", error);
+    // Show error toast
+    showToast("error", "Sorry — something went wrong. Please try again.");
+  } finally {
+    // Re-enable the form
+    setIsSending(false);
   }
+}
 
   return (
     <div className="min-h-screen bg-white text-slate-900">
@@ -135,6 +163,9 @@ export default function App() {
           onTurnstileTokenChange={setTurnstileToken}
           onFieldChange={handleContactFieldChange}
           onFormSubmit={handleContactFormSubmit}
+          toast={toast}
+          onDismissToast={() => setToast(null)}
+          isSending={isSending}
         />
 
         {/* Footer (kept in App for now) */}
