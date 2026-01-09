@@ -54,7 +54,7 @@ async function sendContactEmail(params: {
     `Email: ${params.email}\n` +
     `Phone: ${formatPhoneNumber(params.phone) || "Not provided"}\n` +
     `Service: ${params.service}\n\n` +
-    `Message:\n${params.message}`;
+    `\n${params.message}`;
 
   await mailgunClient.messages.create(mailgunDomain, {
     from: mailgunFrom,
