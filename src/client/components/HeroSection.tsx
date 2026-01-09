@@ -30,7 +30,7 @@ export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
             </h1>
 
             <p className="mt-2 text-[11px] font-semibold text-white/80 sm:text-[12px]">
-              Trusted Across Louisiana &amp; Gulf Coast Since 2013.
+              Trusted Across Louisiana &amp; the Gulf Coast Since 2013
             </p>
 
             <div className="mt-3 flex items-center gap-3">
