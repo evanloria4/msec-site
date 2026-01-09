@@ -34,8 +34,14 @@ export default function App() {
   const toastTimer = useRef<number | null>(null);
   // State to manage contact form submission status
   const [isSending, setIsSending] = useState(false);
-
+  /* Function to show toast notifications
+  * I: type of toast (success or error), message to display
+  * O: Displays a toast notification and automatically dismisses it after 4 seconds
+  * C: None
+  * E: If a toast is already being displayed, it will clear the existing timer before showing the new toast to prevent multiple toasts from stacking or lingering longer than intended
+  */
   function showToast(type: ToastType, message: string) {
+    // Set the toast state to display the notification
     setToast({ type, message });
     if (toastTimer.current) window.clearTimeout(toastTimer.current);
       toastTimer.current = window.setTimeout(() => setToast(null), 4000);
