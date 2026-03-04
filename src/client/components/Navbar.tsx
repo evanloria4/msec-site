@@ -48,12 +48,6 @@ export default function Navbar() {
             <NavLink to="/new-construction" className={linkClass}>
               New Construction
             </NavLink>
-            <NavLink to="/service-area" className={linkClass}>
-              Service Area
-            </NavLink>
-            <NavLink to="/contact" className={linkClass}>
-              Contact
-            </NavLink>
           </nav>
 
           {/* Mobile hamburger */}
@@ -114,16 +108,6 @@ export default function Navbar() {
                 onClick={closeMenu}
               >
                 New Construction
-              </NavLink>
-              <NavLink
-                to="/service-area"
-                className={linkClass}
-                onClick={closeMenu}
-              >
-                Service Area
-              </NavLink>
-              <NavLink to="/contact" className={linkClass} onClick={closeMenu}>
-                Contact
               </NavLink>
             </div>
           </nav>
