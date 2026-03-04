@@ -35,12 +35,12 @@ export default function App() {
         </Routes>
       </main>
       {/* Footer (kept in App for now) */}
-      <footer className="bg-slate-900 py-8 text-white">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4">
-          <div className="font-bold">
+      <footer className="border-t border-slate-200 bg-slate-100 py-8">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-4">
+          <div className="text-sm font-bold text-slate-900">
             © {new Date().getFullYear()} Mechanical Specialties LLC
           </div>
-          <div className="text-sm text-white/80">
+          <div className="text-sm text-slate-500">
             Serving Louisiana & the Gulf Coast
           </div>
         </div>
