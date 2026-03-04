@@ -18,7 +18,7 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
         </h2>
 
         <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 md:col-span-2">
+          <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 md:col-span-2 hover:-translate-y-0.5 hover:shadow-md">
             <div className="flex h-64 items-center justify-center text-sm font-bold text-slate-500">
               MAP PLACEHOLDER
             </div>
@@ -30,7 +30,7 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
               {locations.map((location) => (
                 <div
                   key={location.name}
-                  className="rounded-xl border border-slate-200 px-3 py-2"
+                  className="rounded-xl border border-slate-200 px-3 py-2 hover:-translate-y-0.5 hover:shadow-md"
                 >
                   <div className="font-extrabold">{location.name}</div>
                   {
