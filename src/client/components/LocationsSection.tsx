@@ -23,10 +23,8 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
               MAP PLACEHOLDER
             </div>
           </div>
-
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-            <div className="text-lg font-extrabold">Locations</div>
-            <div className="mt-3 space-y-2">
+            <div className="flex flex-col justify-center gap-3">
               {locations.map((location) => (
                 <div
                   key={location.name}
