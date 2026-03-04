@@ -1,11 +1,9 @@
 import React from 'react';
 import heroBackgroundImageUrl from '../assets/hero.jpg';
 
-type HeroSectionProps = {
-  onRequestQuote: () => void;
-};
+type HeroSectionProps = {};
 
-export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
+export default function HeroSection({}: HeroSectionProps) {
   console.log(heroBackgroundImageUrl);
   return (
     <section className="relative w-full overflow-hidden">
@@ -36,7 +34,6 @@ export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
             <div className="mt-3 flex items-center gap-3">
               <button
                 type="button"
-                onClick={onRequestQuote}
                 className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm hover:bg-orange-400"
               >
                 Schedule Service
