@@ -43,148 +43,234 @@ export default function ContactSection({
   return (
     <>
       {toast && (
-        <div className="fixed right-4 top-16 md:top-24 z-[999]">
+        <div className="fixed right-4 top-4 z-[999]">
           <div
             className={[
-              'w-[min(92vw,420px)] rounded-xl px-4 py-3 shadow-lg border',
-              toast.type === 'success'
-                ? 'bg-emerald-600 text-white border-white/20'
-                : 'bg-red-600 text-white border-white/20',
+              'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-lg border border-white/30',
+              toast.type === 'success' ? 'bg-emerald-500' : 'bg-red-500',
             ].join(' ')}
             role="status"
             aria-live="polite"
           >
-            <div className="flex items-start justify-between gap-3">
-              <div className="text-sm font-semibold">{toast.message}</div>
-              <button
-                type="button"
-                className="text-white/90 hover:text-white"
-                onClick={onDismissToast}
-                aria-label="Close notification"
-              >
-                ✕
-              </button>
-            </div>
+            <span>{toast.message}</span>
+            <button
+              type="button"
+              className="text-white/70 hover:text-white"
+              onClick={onDismissToast}
+              aria-label="Close notification"
+            >
+              ✕
+            </button>
           </div>
         </div>
       )}
 
-      <section
-        id="contact"
-        className="border-y border-slate-200 bg-slate-50 py-12"
-      >
-        <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-2xl font-extrabold tracking-tight">
-            Request Service
-          </h2>
+      <section id="contact" className="bg-slate-100 py-16">
+        <div className="mx-auto max-w-5xl px-4">
+          {/* Header */}
+          <div className="mb-8">
+            <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600">
+              <span className="inline-block h-0.5 w-4 rounded bg-blue-600" />
+              Electrical Services
+            </p>
+            <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">
+              Schedule Your <span className="text-blue-600">Service</span>
+            </h2>
+            <p className="mt-1.5 text-sm text-slate-500">
+              We'll get back to you within one business day.
+            </p>
+          </div>
 
-          <form
-            onSubmit={onFormSubmit}
-            className="mt-5 max-w-4xl rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
-          >
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-              <div>
-                <label className="text-xs font-extrabold text-slate-700">
-                  Name
-                </label>
-                <input
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-3 py-3 outline-none focus:border-slate-900"
-                  name="name"
-                  value={contactFormState.name}
-                  onChange={onFieldChange}
-                  required
-                  placeholder="Your name"
-                />
-              </div>
+          {/* Card */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+            <form onSubmit={onFormSubmit}>
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                {/* Name */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Name
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    name="name"
+                    value={contactFormState.name}
+                    onChange={onFieldChange}
+                    required
+                    placeholder="Your full name"
+                  />
+                </div>
 
-              <div>
-                <label className="text-xs font-extrabold text-slate-700">
-                  Phone
-                </label>
-                <input
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-3 py-3 outline-none focus:border-slate-900"
-                  type="tel"
-                  name="phone"
-                  value={contactFormState.phone}
-                  onChange={onFieldChange}
-                  required
-                  minLength={10}
-                  maxLength={10}
-                  autoComplete="tel"
-                  placeholder="9852495765"
-                />
-              </div>
+                {/* Phone */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Phone
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    type="tel"
+                    name="phone"
+                    value={contactFormState.phone}
+                    onChange={onFieldChange}
+                    required
+                    minLength={10}
+                    maxLength={10}
+                    autoComplete="tel"
+                    placeholder="9852495765"
+                  />
+                </div>
 
-              <div>
-                <label className="text-xs font-extrabold text-slate-700">
-                  Email
-                </label>
-                <input
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-3 py-3 outline-none focus:border-slate-900"
-                  type="email"
-                  name="email"
-                  value={contactFormState.email}
-                  onChange={onFieldChange}
-                  required
-                  placeholder="you@company.com"
-                />
-              </div>
+                {/* Email */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Email
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    type="email"
+                    name="email"
+                    value={contactFormState.email}
+                    onChange={onFieldChange}
+                    required
+                    placeholder="you@company.com"
+                  />
+                </div>
 
-              <div>
-                <label className="text-xs font-extrabold text-slate-700">
-                  Service Needed
-                </label>
-                <select
-                  className="mt-2 w-full rounded-xl border border-slate-300 px-3 py-3 outline-none focus:border-slate-900"
-                  name="service"
-                  value={contactFormState.service}
-                  onChange={onFieldChange}
-                >
-                  {services.map((service) => (
-                    <option key={service.title} value={service.title}>
-                      {service.title}
+                {/* Address */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Address
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    name="address"
+                    required
+                    placeholder="Street address, city, state, ZIP"
+                  />
+                </div>
+
+                {/* Service */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Service Needed
+                  </label>
+                  <select
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    name="service"
+                    value={contactFormState.service}
+                    onChange={onFieldChange}
+                  >
+                    {services[0].bullets.map((service) => (
+                      <option key={service} value={service}>
+                        {service}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Best time to call */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Best Time to Call
+                  </label>
+                  <select
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    name="bestTimeToCall"
+                    defaultValue=""
+                  >
+                    <option value="" disabled>
+                      Select a time window
                     </option>
-                  ))}
-                </select>
+                    <option value="Morning">Morning (8am–12pm)</option>
+                    <option value="Afternoon">Afternoon (12pm–4pm)</option>
+                    <option value="Evening">Evening (4pm–7pm)</option>
+                    <option value="Anytime">Anytime</option>
+                  </select>
+                </div>
+
+                {/* Date */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    Preferred Service Date
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    type="date"
+                    name="preferredServiceDate"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="mt-4">
-              <label className="text-xs font-extrabold text-slate-700">
-                Message
-              </label>
-              <textarea
-                className="mt-2 w-full rounded-xl border border-slate-300 px-3 py-3 outline-none focus:border-slate-900"
-                name="message"
-                value={contactFormState.message}
-                onChange={onFieldChange}
-                rows={5}
-                placeholder="Tell us about the project..."
-              />
-            </div>
+              {/* Description */}
+              <div className="mt-4 flex flex-col gap-1.5">
+                <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                  Description of Work
+                </label>
+                <textarea
+                  className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                  name="message"
+                  value={contactFormState.message}
+                  onChange={onFieldChange}
+                  rows={5}
+                  placeholder="Tell us what's going on — the more detail, the better."
+                />
+              </div>
 
-            <div className="mt-4"></div>
+              {/* Divider */}
+              <div className="my-5 h-px bg-slate-100" />
 
-            <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
-              <button
-                type="submit"
-                disabled={isSending}
-                className="rounded-xl px-4 py-3 font-extrabold text-white bg-slate-900 hover:opacity-95 disabled:opacity-60 disabled:cursor-not-allowed"
-              >
-                {isSending ? 'Sending...' : 'Send Request'}
-              </button>
+              {/* Photo upload */}
+              <div className="flex items-center gap-3">
+                <label className="cursor-pointer rounded-lg border border-dashed border-slate-300 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500 transition hover:border-blue-400 hover:bg-blue-50 hover:text-blue-600">
+                  ↑ Attach Photos
+                  <input
+                    type="file"
+                    name="photos"
+                    accept="image/*"
+                    multiple
+                    className="hidden"
+                  />
+                </label>
+                <span className="text-xs text-slate-400">
+                  PNG, JPG — multiple files allowed
+                </span>
+              </div>
 
-              <div className="text-sm text-slate-600">
-                Or call{' '}
-                <a
-                  className="font-extrabold text-slate-900"
-                  href="tel:+198512495765"
+              {/* Checkbox */}
+              <div className="mt-4">
+                <label className="flex cursor-pointer items-center gap-2.5 text-sm text-slate-600">
+                  <input
+                    type="checkbox"
+                    name="registerForUpdates"
+                    className="h-4 w-4 accent-blue-600"
+                  />
+                  <span className="font-semibold">
+                    Register my home for future service updates
+                  </span>
+                </label>
+              </div>
+
+              {/* Footer */}
+              <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm shadow-blue-200 transition hover:-translate-y-px hover:bg-blue-700 hover:shadow-md hover:shadow-blue-200 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  (985) 249-5765
-                </a>
+                  {isSending ? 'Sending…' : 'Request Service →'}
+                </button>
+
+                <p className="text-sm text-slate-400">
+                  Prefer to talk?{' '}
+                  <a
+                    href="tel:+19852495765"
+                    className="font-bold text-slate-800 underline decoration-slate-200 underline-offset-2 transition hover:text-blue-600 hover:decoration-blue-300"
+                  >
+                    (985) 249-5765
+                  </a>
+                </p>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </section>
     </>
