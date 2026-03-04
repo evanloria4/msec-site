@@ -14,8 +14,8 @@ export default function Navbar() {
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-blue-950 text-white shadow border-b border-white/10">
-      <div className="mx-auto max-w-6xl px-4">
+    <header className="sticky top-0 z-50 border-b border-blue-700 bg-blue-600 shadow-sm">
+      <div className="mx-auto max-w-5xl px-4">
         <div className="flex items-center justify-between py-3">
           {/* Logo / Brand */}
           <NavLink
@@ -23,19 +23,19 @@ export default function Navbar() {
             className="flex items-center gap-3"
             onClick={closeMenu}
           >
-            <div className="h-9 w-9 rounded-xl bg-white/15" />
+            <div className="h-9 w-9 rounded-xl bg-slate-100 border border-slate-200" />
             <div>
-              <div className="font-extrabold leading-tight">
+              <div className="font-extrabold leading-tight tracking-tight text-white">
                 Mechanical Specialties LLC
               </div>
-              <div className="text-xs text-white/80">
+              <div className="text-xs text-blue-200">
                 Electrical Contracting & Mechanical Services
               </div>
             </div>
           </NavLink>
 
           {/* Desktop nav */}
-          <nav className="hidden md:flex items-center gap-2">
+          <nav className="hidden items-center gap-1 md:flex">
             <NavLink to="/" className={linkClass}>
               Home
             </NavLink>
@@ -49,18 +49,26 @@ export default function Navbar() {
               New Construction
             </NavLink>
           </nav>
+          {/* Recommended linkClass:
+        const linkClass = ({ isActive }: { isActive: boolean }) =>
+          [
+            'rounded-xl px-3 py-2 text-sm font-semibold transition',
+            isActive
+              ? 'bg-blue-50 text-blue-600'
+              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
+          ].join(' ');
+        */}
 
           {/* Mobile hamburger */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center rounded-xl p-2 hover:bg-white/10 transition"
+            className="inline-flex items-center justify-center rounded-xl p-2 text-white/70 transition hover:bg-blue-700 hover:text-white md:hidden"
             aria-label="Open menu"
             aria-expanded={isOpen}
             onClick={() => setIsOpen((prev) => !prev)}
           >
-            {/* Icon */}
             <svg
-              className="h-6 w-6"
+              className="h-5 w-5"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -87,8 +95,8 @@ export default function Navbar() {
 
         {/* Mobile dropdown */}
         {isOpen && (
-          <nav className="md:hidden pb-4">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-2">
+          <nav className="pb-3 md:hidden">
+            <div className="rounded-2xl border border-blue-500 bg-blue-700 p-2">
               <NavLink to="/" className={linkClass} onClick={closeMenu}>
                 Home
               </NavLink>
