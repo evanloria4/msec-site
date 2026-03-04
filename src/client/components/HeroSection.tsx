@@ -6,7 +6,7 @@ type HeroSectionProps = {
 };
 
 export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
-  console.log(heroBackgroundImageUrl)
+  console.log(heroBackgroundImageUrl);
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background image */}
@@ -16,7 +16,7 @@ export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
         aria-label="Hero background"
       />
 
-      {/* Dark overlay (left-heavy like your screenshot) */}
+      {/* Dark overlay  */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/45 to-black/10" />
 
       {/* Content */}
@@ -24,13 +24,13 @@ export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
         <div className="mx-auto flex h-full max-w-6xl items-center px-4">
           <div className="max-w-[420px]">
             <h1 className="text-[20px] font-extrabold leading-tight text-white sm:text-[22px] md:text-[26px]">
-              Electrical &amp; Mechanical Services
-              <br />
-              You Can Rely On
+              Reliable Electrical Service From Covington to Baton Rouge
             </h1>
 
             <p className="mt-2 text-[11px] font-semibold text-white/80 sm:text-[12px]">
-              Trusted Across Louisiana &amp; the Gulf Coast Since 2013
+              Residential & Commercial Electrical Contractor |
+              <br />
+              25+ Years Serving Southeast Louisiana
             </p>
 
             <div className="mt-3 flex items-center gap-3">
@@ -39,9 +39,8 @@ export default function HeroSection({ onRequestQuote }: HeroSectionProps) {
                 onClick={onRequestQuote}
                 className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm hover:bg-orange-400"
               >
-                Request Service
+                Schedule Service
               </button>
-
             </div>
           </div>
         </div>
