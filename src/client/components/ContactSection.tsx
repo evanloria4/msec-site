@@ -1,7 +1,7 @@
-import React from "react";
-import TurnstileWidget from "./TurnstileWidget";
+import React from 'react';
+import TurnstileWidget from './TurnstileWidget';
 
-type ToastType = "success" | "error";
+type ToastType = 'success' | 'error';
 
 type Service = {
   title: string;
@@ -19,8 +19,6 @@ type ContactFormState = {
 type ContactSectionProps = {
   services: Service[];
   contactFormState: ContactFormState;
-  turnstileToken: string;
-  onTurnstileTokenChange: (token: string) => void;
   onFieldChange: (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
@@ -33,30 +31,26 @@ type ContactSectionProps = {
   isSending: boolean;
 };
 
-
 export default function ContactSection({
   services,
   contactFormState,
-  turnstileToken,
-  onTurnstileTokenChange,
   onFieldChange,
   onFormSubmit,
   toast,
   onDismissToast,
   isSending,
 }: ContactSectionProps) {
-
   return (
     <>
       {toast && (
         <div className="fixed right-4 top-16 md:top-24 z-[999]">
           <div
             className={[
-              "w-[min(92vw,420px)] rounded-xl px-4 py-3 shadow-lg border",
-              toast.type === "success"
-                ? "bg-emerald-600 text-white border-white/20"
-                : "bg-red-600 text-white border-white/20",
-            ].join(" ")}
+              'w-[min(92vw,420px)] rounded-xl px-4 py-3 shadow-lg border',
+              toast.type === 'success'
+                ? 'bg-emerald-600 text-white border-white/20'
+                : 'bg-red-600 text-white border-white/20',
+            ].join(' ')}
             role="status"
             aria-live="polite"
           >
@@ -75,7 +69,10 @@ export default function ContactSection({
         </div>
       )}
 
-      <section id="contact" className="border-y border-slate-200 bg-slate-50 py-12">
+      <section
+        id="contact"
+        className="border-y border-slate-200 bg-slate-50 py-12"
+      >
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-2xl font-extrabold tracking-tight">
             Request Service
@@ -166,12 +163,7 @@ export default function ContactSection({
               />
             </div>
 
-            <div className="mt-4">
-              <TurnstileWidget
-                siteKey="YOUR_TURNSTILE_SITE_KEY"
-                onTokenChange={onTurnstileTokenChange}
-              />
-            </div>
+            <div className="mt-4"></div>
 
             <div className="mt-4 flex flex-wrap items-center justify-between gap-3">
               <button
@@ -179,11 +171,11 @@ export default function ContactSection({
                 disabled={isSending}
                 className="rounded-xl px-4 py-3 font-extrabold text-white bg-slate-900 hover:opacity-95 disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                {isSending ? "Sending..." : "Send Request"}
+                {isSending ? 'Sending...' : 'Send Request'}
               </button>
 
               <div className="text-sm text-slate-600">
-                Or call{" "}
+                Or call{' '}
                 <a
                   className="font-extrabold text-slate-900"
                   href="tel:+198512495765"
@@ -196,6 +188,5 @@ export default function ContactSection({
         </div>
       </section>
     </>
-
   );
 }
