@@ -5,6 +5,7 @@ import axios from 'axios';
 import Navbar from './components/Navbar';
 import ContactBanner from './components/ContactBanner';
 import Home from './pages/Home';
+import About from './pages/About';
 
 type ContactFormState = {
   name: string;
@@ -105,6 +106,7 @@ export default function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </main>
       <ContactBanner />
