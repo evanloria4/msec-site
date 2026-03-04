@@ -1,6 +1,5 @@
 import React, { useMemo, useRef, useState } from 'react';
 import HeroSection from '../components/HeroSection';
-import AboutSection from '../components/AboutSection';
 import ServicesSection from '../components/ServicesSection';
 import LocationsSection from '../components/LocationsSection';
 import ContactBanner from '../components/ContactBanner';
@@ -64,21 +63,9 @@ export default function Home() {
     <div className="min-h-screen bg-white text-slate-900">
       <main id="top">
         <HeroSection />
-        <AboutSection />
         <ServicesSection services={services} />
         <LocationsSection locations={locations} />
-
-        {/* <ContactSection
-          services={services}
-          contactFormState={contactFormState}
-          turnstileToken={turnstileToken}
-          onTurnstileTokenChange={setTurnstileToken}
-          onFieldChange={handleContactFieldChange}
-          onFormSubmit={handleContactFormSubmit}
-          toast={toast}
-          onDismissToast={() => setToast(null)}
-          isSending={isSending}
-        /> */}
+        <ContactBanner />
       </main>
     </div>
   );

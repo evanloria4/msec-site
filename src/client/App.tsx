@@ -1,11 +1,10 @@
 // src/client/App.tsx
 import React, { useMemo, useRef, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import axios from 'axios';
 import Navbar from './components/Navbar';
-import ContactBanner from './components/ContactBanner';
 import Home from './pages/Home';
 import About from './pages/About';
+import ServiceWork from './pages/ServiceWork';
 
 type ContactFormState = {
   name: string;
@@ -32,9 +31,9 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
+          <Route path="/service-work" element={<ServiceWork />} />
         </Routes>
       </main>
-      <ContactBanner />
       {/* Footer (kept in App for now) */}
       <footer className="bg-slate-900 py-8 text-white">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4">
