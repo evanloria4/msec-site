@@ -63,7 +63,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <main id="top">
-        <HeroSection onRequestQuote={() => scrollToSection('contact')} />
+        <HeroSection />
         <AboutSection />
         <ServicesSection services={services} />
         <LocationsSection locations={locations} />
@@ -79,18 +79,6 @@ export default function Home() {
           onDismissToast={() => setToast(null)}
           isSending={isSending}
         /> */}
-        <ContactBanner />
-        {/* Footer (kept in App for now) */}
-        <footer className="bg-slate-900 py-8 text-white">
-          <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4">
-            <div className="font-bold">
-              © {new Date().getFullYear()} Mechanical Specialties LLC
-            </div>
-            <div className="text-sm text-white/80">
-              Serving Louisiana & the Gulf Coast
-            </div>
-          </div>
-        </footer>
       </main>
     </div>
   );
