@@ -16,7 +16,10 @@ type ContactFormState = {
   name: string;
   phone: string;
   email: string;
-  address: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
   service: string;
   bestTimeToCall: string;
   preferredDate: string;
@@ -66,7 +69,10 @@ export default function ServiceWork() {
     name: '',
     phone: '',
     email: '',
-    address: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
     service: services[0]?.title ?? 'Breaker Tripping Issues',
     bestTimeToCall: '',
     preferredDate: '',
@@ -162,9 +168,28 @@ export default function ServiceWork() {
     if (isSending) return;
 
     setIsSending(true);
+    const formData = new FormData();
+    formData.append('name', contactFormState.name);
+    formData.append('phone', contactFormState.phone);
+    formData.append('email', contactFormState.email);
+    formData.append('service', contactFormState.service);
+    formData.append('bestTimeToCall', contactFormState.bestTimeToCall);
+    formData.append('preferredDate', contactFormState.preferredDate);
+    formData.append('message', contactFormState.message);
+    formData.append(
+      'registerForUpdates',
+      String(contactFormState.registerForUpdates)
+    );
     try {
+      if (contactFormState.photos) {
+        Array.from(contactFormState.photos).forEach((file) => {
+          formData.append('photos', file);
+        });
+      }
       // Submit the form data to the backend API
-      await axios.post('/api/contact', contactFormState);
+      await axios.post('/api/contact', formData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       // Show success toast and reset form
       showToast('success', 'Thanks! Your request was submitted.');
       // Empty the form and reset to default service
@@ -172,7 +197,10 @@ export default function ServiceWork() {
         name: '',
         phone: '',
         email: '',
-        address: '',
+        street: '',
+        city: '',
+        state: '',
+        zip: '',
         service: services[0]?.title ?? 'Breaker Tripping Issues',
         bestTimeToCall: '',
         preferredDate: '',

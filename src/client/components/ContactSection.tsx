@@ -12,7 +12,10 @@ type ContactFormState = {
   name: string;
   phone: string;
   email: string;
-  address: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
   service: string;
   bestTimeToCall: string;
   preferredDate: string;
@@ -142,18 +145,65 @@ export default function ContactSection({
                   />
                 </div>
 
-                {/* Address */}
-                <div className="flex flex-col gap-1.5">
+                {/* Street Address */}
+                <div className="flex flex-col gap-1.5 md:col-span-2">
                   <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                    Address
+                    Street Address
                   </label>
                   <input
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
-                    name="address"
-                    value={contactFormState.address}
+                    name="street"
+                    value={contactFormState.street}
                     onChange={handleFieldChange}
                     required
-                    placeholder="Street address, city, state, ZIP"
+                    placeholder="123 Main St"
+                  />
+                </div>
+
+                {/* City */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    City
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    name="city"
+                    value={contactFormState.city}
+                    onChange={handleFieldChange}
+                    required
+                    placeholder="Hammond"
+                  />
+                </div>
+
+                {/* State */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    State
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    name="state"
+                    value={contactFormState.state}
+                    onChange={handleFieldChange}
+                    required
+                    placeholder="LA"
+                    maxLength={2}
+                  />
+                </div>
+
+                {/* ZIP */}
+                <div className="flex flex-col gap-1.5">
+                  <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
+                    ZIP Code
+                  </label>
+                  <input
+                    className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
+                    name="zip"
+                    value={contactFormState.zip}
+                    onChange={handleFieldChange}
+                    required
+                    placeholder="70401"
+                    maxLength={5}
                   />
                 </div>
 
