@@ -66,6 +66,13 @@ async function sendContactEmail(params: {
 
   const emailSubject = `New Service Request: ${params.service}`;
   const address = `${params.street}, ${params.city}, ${params.state} ${params.zip}`;
+  const formattedDate = params.preferredDate
+    ? new Date(params.preferredDate + 'T00:00:00').toLocaleDateString('en-US', {
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+      })
+    : 'Not provided';
   const emailHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -130,7 +137,7 @@ async function sendContactEmail(params: {
                     'Best Time to Call',
                     params.bestTimeToCall || 'Not provided',
                   ],
-                  ['Preferred Date', params.preferredDate || 'Not provided'],
+                  ['Preferred Date', formattedDate || 'Not provided'],
                   [
                     'Register for Updates',
                     params.registerForUpdates === 'true' ? 'Yes' : 'No',
