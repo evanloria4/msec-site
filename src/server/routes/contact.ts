@@ -14,6 +14,7 @@ type ContactRequestBody = {
   state: string;
   zip: string;
   service?: string;
+  project?: string;
   bestTimeToCall?: string;
   preferredDate?: string;
   message?: string;
@@ -44,6 +45,7 @@ async function sendContactEmail(params: {
   state: string;
   zip: string;
   service?: string;
+  project?: string;
   bestTimeToCall?: string;
   preferredDate?: string;
   message?: string;
@@ -64,7 +66,11 @@ async function sendContactEmail(params: {
     key: mailgunApiKey,
   });
 
-  const emailSubject = `New Service Request: ${params.service}`;
+  const emailSubject = params.service
+    ? `New Service Request: ${params.service}`
+    : params.project
+      ? `New Project Request: ${params.project}`
+      : 'New Contact Request';
   const address = `${params.street}, ${params.city}, ${params.state} ${params.zip}`;
   const formattedDate = params.preferredDate
     ? new Date(params.preferredDate + 'T00:00:00').toLocaleDateString('en-US', {
@@ -93,10 +99,10 @@ async function sendContactEmail(params: {
                 Mechanical Specialties LLC
               </p>
               <h1 style="margin:0;font-size:22px;font-weight:800;color:#ffffff;">
-                New Service Request
+                ${params.service ? 'New Service Request' : 'New Construction Request'}
               </h1>
               <p style="margin:6px 0 0;font-size:13px;color:#bfdbfe;">
-                ${params.service}
+                ${params.service ?? params.project}
               </p>
             </td>
           </tr>
@@ -129,10 +135,13 @@ async function sendContactEmail(params: {
               </table>
 
               <!-- Service Details -->
-              <p style="margin:0 0 16px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;">Service Details</p>
+              <p style="margin:0 0 16px;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#94a3b8;">${params.service ? 'Service Details' : 'Project Details'}</p>
               <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:24px;">
                 ${[
-                  ['Service', params.service],
+                  [
+                    params.service ? 'Service' : 'Project Type',
+                    params.service ?? params.project,
+                  ],
                   [
                     'Best Time to Call',
                     params.bestTimeToCall || 'Not provided',
@@ -208,7 +217,6 @@ contactRouter.post(
   '/service-work',
   upload.array('photos'),
   async (request: Request, response: Response) => {
-    const requestBody = request.body as ContactRequestBody;
     const files = request.files as Express.Multer.File[];
     try {
       const requestBody = request.body as ContactRequestBody;
@@ -237,10 +245,10 @@ contactRouter.post(
         name,
         phone,
         email,
-        street: requestBody.street ?? '',
-        city: requestBody.city ?? '',
-        state: requestBody.state ?? '',
-        zip: requestBody.zip ?? '',
+        street: street,
+        city: city,
+        state: state,
+        zip: zip,
         service,
         bestTimeToCall,
         preferredDate,
@@ -257,7 +265,65 @@ contactRouter.post(
       console.error('Contact form error:', error);
       return response.status(500).json({
         ok: false,
-        error: 'Failed to send contact request',
+        error: 'Failed to send Service Work request',
+      });
+    }
+  }
+);
+
+contactRouter.post(
+  '/new-construction',
+  upload.array('photos'),
+  async (request: Request, response: Response) => {
+    const files = request.files as Express.Multer.File[];
+    try {
+      const requestBody = request.body as ContactRequestBody;
+
+      const name = (requestBody.name ?? '').trim();
+      const phone = (requestBody.phone ?? '').trim();
+      const email = (requestBody.email ?? '').trim();
+      const street = (requestBody.street ?? '').trim();
+      const city = (requestBody.city ?? '').trim();
+      const state = (requestBody.state ?? '').trim();
+      const zip = (requestBody.zip ?? '').trim();
+      const project = (requestBody.project ?? '').trim();
+      const bestTimeToCall = (requestBody.bestTimeToCall ?? '').trim();
+      const preferredDate = (requestBody.preferredDate ?? '').trim();
+      const message = (requestBody.message ?? '').trim();
+      const registerForUpdates = requestBody.registerForUpdates ?? false;
+
+      if (!name || !email || !project) {
+        return response.status(400).json({
+          ok: false,
+          error: 'Missing required fields',
+        });
+      }
+
+      await sendContactEmail({
+        name,
+        phone,
+        email,
+        street: street,
+        city: city,
+        state: state,
+        zip: zip,
+        project,
+        bestTimeToCall,
+        preferredDate,
+        message,
+        registerForUpdates,
+        photos: files ?? [],
+      });
+
+      return response.status(200).json({
+        ok: true,
+        message: 'Contact request sent successfully',
+      });
+    } catch (error) {
+      console.error('Contact form error:', error);
+      return response.status(500).json({
+        ok: false,
+        error: 'Failed to send New Construction request',
       });
     }
   }
