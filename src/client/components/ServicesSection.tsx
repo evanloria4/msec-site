@@ -14,7 +14,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
     <section id="services" className="bg-white py-16">
       <div className="mx-auto max-w-5xl px-4">
         <div className="mb-10">
-          <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600">
+          <p className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-blue-600">
             <span className="inline-block h-0.5 w-4 rounded bg-blue-600" />
             What We Do
           </p>

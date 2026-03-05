@@ -10,7 +10,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 md:items-center">
           {/* Left: text */}
           <div>
-            <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600">
+            <p className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-blue-600">
               <span className="inline-block h-0.5 w-4 rounded bg-blue-600" />
               Who We Are
             </p>
