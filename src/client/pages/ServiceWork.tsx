@@ -7,11 +7,6 @@ type Service = {
   bullets: string[];
 };
 
-type Location = {
-  name: string;
-  note?: string;
-};
-
 type ContactFormState = {
   name: string;
   phone: string;
