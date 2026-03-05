@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import heroBackgroundImageUrl from '../assets/hero.jpg';
 
 type HeroSectionProps = {};
@@ -31,13 +32,19 @@ export default function HeroSection({}: HeroSectionProps) {
               25+ Years Serving Southeast Louisiana
             </p>
 
-            <div className="mt-3 flex items-center gap-3">
-              <button
-                type="button"
-                className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm hover:bg-orange-400"
+            <div className="mt-3 flex flex-wrap items-center gap-3">
+              <Link
+                to="/service-work"
+                className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm transition hover:bg-orange-400"
               >
                 Schedule Service
-              </button>
+              </Link>
+              <Link
+                to="/new-construction"
+                className="rounded-md border border-white/50 bg-white/10 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/20"
+              >
+                New Construction
+              </Link>
             </div>
           </div>
         </div>
