@@ -53,7 +53,7 @@ export default function ContactSection({
   return (
     <>
       {toast && (
-        <div className="fixed left-1/2 top-20 z-[999] -translate-x-1/2 sm:left-auto sm:right-4 sm:top-4 sm:translate-x-0">
+        <div className="fixed left-1/2 top-20 z-[999] -translate-x-1/2 sm:left-auto sm:right-4 sm:top-20 sm:translate-x-0">
           <div
             className={[
               'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-lg border border-white/30',
@@ -87,7 +87,7 @@ export default function ContactSection({
               Schedule Your <span className="text-blue-600">Service</span>
             </h2>
             <p className="mt-1.5 text-sm text-slate-500">
-              We'll get back to you within one business day.
+              Fill out the form and someone from our team will be in touch.
             </p>
           </div>
 
