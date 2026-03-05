@@ -5,12 +5,11 @@ import heroBackgroundImageUrl from '../assets/hero.jpg';
 type HeroSectionProps = {};
 
 export default function HeroSection({}: HeroSectionProps) {
-  console.log(heroBackgroundImageUrl);
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background image */}
       <div
-        className="h-[160px] w-full bg-cover bg-center sm:h-[190px] md:h-[220px]"
+        className="h-[240px] w-full bg-cover bg-center sm:h-[280px] md:h-[340px]"
         style={{ backgroundImage: `url(${heroBackgroundImageUrl})` }}
         aria-label="Hero background"
       />
