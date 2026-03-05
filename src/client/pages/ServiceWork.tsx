@@ -188,7 +188,7 @@ export default function ServiceWork() {
         });
       }
       // Submit the form data to the backend API
-      await axios.post('/api/contact', formData, {
+      await axios.post('/api/contact/service-work', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       // Show success toast and reset form

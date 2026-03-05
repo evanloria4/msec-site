@@ -202,10 +202,10 @@ async function sendContactEmail(params: {
   });
 }
 
-// POST req to /api/contact
+// POST req to /api/contact/service-work
 const upload = multer({ storage: multer.memoryStorage() });
 contactRouter.post(
-  '/',
+  '/service-work',
   upload.array('photos'),
   async (request: Request, response: Response) => {
     const requestBody = request.body as ContactRequestBody;
