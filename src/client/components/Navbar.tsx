@@ -15,7 +15,7 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-blue-700 bg-blue-600 shadow-sm">
-      <div className="mx-auto max-w-5xl px-4">
+      <div className="mx-auto max-w-7xl px-4">
         <div className="flex items-center justify-between py-3">
           {/* Logo / Brand */}
           <NavLink
