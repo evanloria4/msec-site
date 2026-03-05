@@ -60,13 +60,11 @@ export default function Home() {
     []
   );
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <main id="top">
-        <HeroSection />
-        <ServicesSection services={services} />
-        <LocationsSection locations={locations} />
-        <ContactBanner />
-      </main>
+    <div id="top">
+      <HeroSection />
+      <ServicesSection services={services} />
+      <LocationsSection locations={locations} />
+      <ContactBanner />
     </div>
   );
 }
