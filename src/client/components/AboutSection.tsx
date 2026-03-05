@@ -44,27 +44,6 @@ export default function AboutSection() {
                 craftsmanship, and electrical solutions built to last.
               </p>
             </div>
-
-            {/* Stats row */}
-            <div className="mt-8 grid grid-cols-3 gap-4">
-              {[
-                { value: '25+', label: 'Years in Business' },
-                { value: '2', label: 'Service Areas' },
-                { value: '100%', label: 'Licensed & Insured' },
-              ].map(({ value, label }) => (
-                <div
-                  key={label}
-                  className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm text-center"
-                >
-                  <div className="text-2xl font-extrabold tracking-tight text-blue-600">
-                    {value}
-                  </div>
-                  <div className="mt-0.5 text-xs font-semibold text-slate-500">
-                    {label}
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
 
           {/* Right: photo placeholder */}
