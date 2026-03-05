@@ -49,15 +49,6 @@ export default function Navbar() {
               New Construction
             </NavLink>
           </nav>
-          {/* Recommended linkClass:
-        const linkClass = ({ isActive }: { isActive: boolean }) =>
-          [
-            'rounded-xl px-3 py-2 text-sm font-semibold transition',
-            isActive
-              ? 'bg-blue-50 text-blue-600'
-              : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900',
-          ].join(' ');
-        */}
 
           {/* Mobile hamburger */}
           <button
