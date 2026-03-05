@@ -53,7 +53,7 @@ export default function ContactSection({
   return (
     <>
       {toast && (
-        <div className="fixed right-4 top-4 z-[999]">
+        <div className="fixed left-1/2 top-20 z-[999] -translate-x-1/2 sm:left-auto sm:right-4 sm:top-4 sm:translate-x-0">
           <div
             className={[
               'flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-semibold text-white shadow-lg border border-white/30',
