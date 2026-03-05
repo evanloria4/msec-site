@@ -1,6 +1,6 @@
 import React, { useMemo, useState, useRef } from 'react';
 import axios from 'axios';
-import ContactSection from '../components/ContactSection';
+import ServiceContact from '../components/ServiceContact';
 
 type Service = {
   title: string;
@@ -220,7 +220,7 @@ export default function ServiceWork() {
   }
 
   return (
-    <ContactSection
+    <ServiceContact
       services={services}
       contactFormState={contactFormState}
       handleFieldChange={handleContactFieldChange}
