@@ -15,7 +15,7 @@ type ContactFormState = {
   city: string;
   state: string;
   zip: string;
-  service: string;
+  project: string;
   bestTimeToCall: string;
   preferredDate: string;
   message: string;
@@ -80,13 +80,14 @@ export default function NewContact({
           <div className="mb-8">
             <p className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-blue-600">
               <span className="inline-block h-0.5 w-4 rounded bg-blue-600" />
-              Electrical Services
+              New Construction
             </p>
             <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">
-              Schedule Your <span className="text-blue-600">Service</span>
+              Start Your <span className="text-blue-600">Project</span>
             </h2>
             <p className="mt-1.5 text-sm text-slate-500">
-              We'll get back to you within one business day.
+              Tell us about your project and we'll be in touch within one
+              business day.
             </p>
           </div>
 
@@ -206,18 +207,18 @@ export default function NewContact({
                   />
                 </div>
 
-                {/* Service */}
+                {/* Project Type */}
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                    Service Needed
+                    Project Type
                   </label>
                   <select
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     name="service"
-                    value={contactFormState.service}
+                    value={contactFormState.project}
                     onChange={handleFieldChange}
                   >
-                    {services[0].bullets.map((service) => (
+                    {services[1].bullets.map((service) => (
                       <option key={service} value={service}>
                         {service}
                       </option>
@@ -249,7 +250,7 @@ export default function NewContact({
                 {/* Date */}
                 <div className="flex flex-col gap-1.5">
                   <label className="text-xs font-bold uppercase tracking-wide text-slate-500">
-                    Preferred Service Date
+                    Preferred Start Date
                   </label>
                   <input
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
@@ -272,7 +273,7 @@ export default function NewContact({
                   value={contactFormState.message}
                   onChange={handleFieldChange}
                   rows={5}
-                  placeholder="Tell us what's going on — the more detail, the better."
+                  placeholder="Describe your project — scope, timeline, any specific requirements."
                 />
               </div>
 
@@ -340,7 +341,7 @@ export default function NewContact({
                   disabled={isSending}
                   className="rounded-xl bg-blue-600 px-5 py-2.5 text-sm font-bold text-white shadow-sm shadow-blue-200 transition hover:-translate-y-px hover:bg-blue-700 hover:shadow-md hover:shadow-blue-200 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                  {isSending ? 'Sending…' : 'Request Service →'}
+                  {isSending ? 'Sending…' : 'Submit Project Request →'}
                 </button>
                 <p className="text-sm text-slate-400">
                   Prefer to talk?{' '}

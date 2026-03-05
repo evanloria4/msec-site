@@ -16,7 +16,7 @@ type ContactFormState = {
   city: string;
   state: string;
   zip: string;
-  service: string;
+  project: string;
   bestTimeToCall: string;
   preferredDate: string;
   message: string;
@@ -69,7 +69,7 @@ export default function NewConstruction() {
     city: '',
     state: '',
     zip: '',
-    service: services[0]?.title ?? 'Breaker Tripping Issues',
+    project: services[1]?.title ?? 'Full Home Wiring',
     bestTimeToCall: '',
     preferredDate: '',
     photos: null,
@@ -169,7 +169,7 @@ export default function NewConstruction() {
     formData.append('city', contactFormState.city);
     formData.append('state', contactFormState.state);
     formData.append('zip', contactFormState.zip);
-    formData.append('service', contactFormState.service);
+    formData.append('project', contactFormState.project);
     formData.append('bestTimeToCall', contactFormState.bestTimeToCall);
     formData.append('preferredDate', contactFormState.preferredDate);
     formData.append('message', contactFormState.message);
@@ -184,7 +184,7 @@ export default function NewConstruction() {
         });
       }
       // Submit the form data to the backend API
-      await axios.post('/api/contact/service-work', formData, {
+      await axios.post('/api/contact/new-construction', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
       // Show success toast and reset form
@@ -198,7 +198,7 @@ export default function NewConstruction() {
         city: '',
         state: '',
         zip: '',
-        service: services[0]?.title ?? 'Breaker Tripping Issues',
+        project: services[1]?.title ?? 'Full Home Wiring',
         bestTimeToCall: '',
         preferredDate: '',
         photos: null,
