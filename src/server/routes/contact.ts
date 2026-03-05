@@ -9,12 +9,15 @@ type ContactRequestBody = {
   name: string;
   phone: string;
   email: string;
-  address: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
   service?: string;
   bestTimeToCall?: string;
   preferredDate?: string;
   message?: string;
-  registerForUpdates: boolean;
+  registerForUpdates: string;
   photos: Express.Multer.File[];
 };
 
@@ -36,12 +39,15 @@ async function sendContactEmail(params: {
   name: string;
   phone: string;
   email: string;
-  address: string;
+  street: string;
+  city: string;
+  state: string;
+  zip: string;
   service?: string;
   bestTimeToCall?: string;
   preferredDate?: string;
   message?: string;
-  registerForUpdates: boolean;
+  registerForUpdates: string;
   photos: Express.Multer.File[];
 }) {
   const mailgunApiKey = process.env.MAILGUN_API_KEY;
@@ -59,7 +65,7 @@ async function sendContactEmail(params: {
   });
 
   const emailSubject = `New Service Request: ${params.service}`;
-
+  const address = `${params.street}, ${params.city}, ${params.state} ${params.zip}`;
   const emailHtml = `
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +105,7 @@ async function sendContactEmail(params: {
                   ['Name', params.name],
                   ['Email', params.email],
                   ['Phone', formatPhoneNumber(params.phone) || 'Not provided'],
-                  ['Address', params.address || 'Not provided'],
+                  ['Address', address],
                 ]
                   .map(
                     ([label, value]) => `
@@ -127,7 +133,7 @@ async function sendContactEmail(params: {
                   ['Preferred Date', params.preferredDate || 'Not provided'],
                   [
                     'Register for Updates',
-                    params.registerForUpdates ? 'Yes' : 'No',
+                    params.registerForUpdates === 'true' ? 'Yes' : 'No',
                   ],
                 ]
                   .map(
@@ -203,7 +209,10 @@ contactRouter.post(
       const name = (requestBody.name ?? '').trim();
       const phone = (requestBody.phone ?? '').trim();
       const email = (requestBody.email ?? '').trim();
-      const address = (requestBody.address ?? '').trim();
+      const street = (requestBody.street ?? '').trim();
+      const city = (requestBody.city ?? '').trim();
+      const state = (requestBody.state ?? '').trim();
+      const zip = (requestBody.zip ?? '').trim();
       const service = (requestBody.service ?? '').trim();
       const bestTimeToCall = (requestBody.bestTimeToCall ?? '').trim();
       const preferredDate = (requestBody.preferredDate ?? '').trim();
@@ -221,7 +230,10 @@ contactRouter.post(
         name,
         phone,
         email,
-        address,
+        street: requestBody.street ?? '',
+        city: requestBody.city ?? '',
+        state: requestBody.state ?? '',
+        zip: requestBody.zip ?? '',
         service,
         bestTimeToCall,
         preferredDate,

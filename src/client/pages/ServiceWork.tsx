@@ -100,7 +100,6 @@ export default function ServiceWork() {
     // Check the type of input to handle checkboxes and file uploads differently since they don't use the value property in the same way as text inputs
     if (target instanceof HTMLInputElement) {
       if (target.type === 'checkbox') {
-        console.log('Checkbox change detected:', target.name, target.checked);
         // Set the state for registerForUpdates to the checked status of the checkbox
         setContactFormState((prev) => ({
           ...prev,
@@ -126,7 +125,6 @@ export default function ServiceWork() {
         return;
       }
     }
-    console.log('Input change detected:', target.name, target.value);
     setContactFormState((prev) => ({ ...prev, [target.name]: target.value }));
   }
 
@@ -141,7 +139,6 @@ export default function ServiceWork() {
 
     const dt = new DataTransfer();
     filtered.forEach((file) => dt.items.add(file));
-    console.log('Removing file:', fileName, 'Remaining files:', filtered);
     setContactFormState((prev) => ({ ...prev, photos: dt.files }));
     // Also clear the file input value to allow re-uploading the same file if desired
     const fileInput = document.querySelector<HTMLInputElement>(
@@ -172,6 +169,10 @@ export default function ServiceWork() {
     formData.append('name', contactFormState.name);
     formData.append('phone', contactFormState.phone);
     formData.append('email', contactFormState.email);
+    formData.append('street', contactFormState.street);
+    formData.append('city', contactFormState.city);
+    formData.append('state', contactFormState.state);
+    formData.append('zip', contactFormState.zip);
     formData.append('service', contactFormState.service);
     formData.append('bestTimeToCall', contactFormState.bestTimeToCall);
     formData.append('preferredDate', contactFormState.preferredDate);
