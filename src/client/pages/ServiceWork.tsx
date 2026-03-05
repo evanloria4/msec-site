@@ -126,18 +126,22 @@ export default function ServiceWork() {
 
   // Remove file from photos list in state by index
   function handleRemovePhoto(fileName: string) {
+    // Create an array of the existing files in state
     const existing = contactFormState.photos
       ? Array.from(contactFormState.photos)
       : [];
+    // Remove the file with the matching name from the array
     const filtered = existing.filter((file) => file.name !== fileName);
 
     const dt = new DataTransfer();
     filtered.forEach((file) => dt.items.add(file));
     console.log('Removing file:', fileName, 'Remaining files:', filtered);
     setContactFormState((prev) => ({ ...prev, photos: dt.files }));
+    // Also clear the file input value to allow re-uploading the same file if desired
     const fileInput = document.querySelector<HTMLInputElement>(
       'input[name="photos"]'
     );
+    // If the file input exists, clear its value to reset the file selection (this allows users to re-upload the same file if they want after removing it)
     if (fileInput) fileInput.value = '';
   }
 
