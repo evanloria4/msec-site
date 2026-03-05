@@ -103,17 +103,42 @@ export default function ServiceWork() {
         return;
       }
       if (target.type === 'file') {
-        console.log('File input change detected:', target.name, target.files);
-        // Set the state for photos to the list of files selected by the user
-        setContactFormState((prev) => ({
-          ...prev,
-          [target.name]: target.files,
-        }));
+        // Grab the new filesfrom the input
+        const newFiles = target.files ? Array.from(target.files) : [];
+        // Grab the current files from state
+        const existingFiles = contactFormState.photos
+          ? Array.from(contactFormState.photos)
+          : [];
+        // Merge newFiles with existingFiles
+        const merged = [...existingFiles, ...newFiles];
+
+        // Convert back to a DataTransfer FileList
+        const dt = new DataTransfer();
+        merged.forEach((file) => dt.items.add(file));
+
+        setContactFormState((prev) => ({ ...prev, [target.name]: dt.files }));
         return;
       }
     }
     console.log('Input change detected:', target.name, target.value);
     setContactFormState((prev) => ({ ...prev, [target.name]: target.value }));
+  }
+
+  // Remove file from photos list in state by index
+  function handleRemovePhoto(fileName: string) {
+    const existing = contactFormState.photos
+      ? Array.from(contactFormState.photos)
+      : [];
+    const filtered = existing.filter((file) => file.name !== fileName);
+
+    const dt = new DataTransfer();
+    filtered.forEach((file) => dt.items.add(file));
+    console.log('Removing file:', fileName, 'Remaining files:', filtered);
+    setContactFormState((prev) => ({ ...prev, photos: dt.files }));
+    const fileInput = document.querySelector<HTMLInputElement>(
+      'input[name="photos"]'
+    );
+    if (fileInput) fileInput.value = '';
   }
 
   /* Function to show toast notifications
@@ -166,6 +191,7 @@ export default function ServiceWork() {
       services={services}
       contactFormState={contactFormState}
       handleFieldChange={handleContactFieldChange}
+      handleRemovePhoto={handleRemovePhoto}
       onFormSubmit={handleContactFormSubmit}
       toast={toast}
       onDismissToast={() => setToast(null)}

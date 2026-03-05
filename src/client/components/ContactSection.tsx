@@ -29,6 +29,7 @@ type ContactSectionProps = {
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) => void;
+  handleRemovePhoto: (fileName: string) => void;
   onFormSubmit: (event: React.FormEvent) => void;
 
   toast: { type: ToastType; message: string } | null;
@@ -40,6 +41,7 @@ export default function ContactSection({
   services,
   contactFormState,
   handleFieldChange,
+  handleRemovePhoto,
   onFormSubmit,
   toast,
   onDismissToast,
@@ -245,7 +247,28 @@ export default function ContactSection({
                   PNG, JPG — multiple files allowed
                 </span>
               </div>
-
+              {/* Selected files preview */}
+              {contactFormState.photos &&
+                contactFormState.photos.length > 0 && (
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {Array.from(contactFormState.photos).map((file) => (
+                      <span
+                        key={file.name}
+                        className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-600"
+                      >
+                        📎 {file.name}
+                        <button
+                          type="button"
+                          onClick={() => handleRemovePhoto(file.name)}
+                          className="ml-1 text-slate-400 hover:text-red-500 transition"
+                          aria-label={`Remove ${file.name}`}
+                        >
+                          ✕
+                        </button>
+                      </span>
+                    ))}
+                  </div>
+                )}
               {/* Checkbox */}
               <div className="mt-4">
                 <label className="flex cursor-pointer items-center gap-2.5 text-sm text-slate-600">
