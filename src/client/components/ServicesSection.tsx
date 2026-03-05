@@ -23,7 +23,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-x-10">
           {services.map((service) => (
             <div
               key={service.title}
