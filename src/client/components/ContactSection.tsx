@@ -12,14 +12,19 @@ type ContactFormState = {
   name: string;
   phone: string;
   email: string;
+  address: string;
   service: string;
+  bestTimeToCall: string;
+  preferredDate: string;
   message: string;
+  photos: FileList | null;
+  registerForUpdates: boolean;
 };
 
 type ContactSectionProps = {
   services: Service[];
   contactFormState: ContactFormState;
-  onFieldChange: (
+  handleFieldChange: (
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
@@ -34,7 +39,7 @@ type ContactSectionProps = {
 export default function ContactSection({
   services,
   contactFormState,
-  onFieldChange,
+  handleFieldChange,
   onFormSubmit,
   toast,
   onDismissToast,
@@ -94,7 +99,7 @@ export default function ContactSection({
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     name="name"
                     value={contactFormState.name}
-                    onChange={onFieldChange}
+                    onChange={handleFieldChange}
                     required
                     placeholder="Your full name"
                   />
@@ -110,7 +115,7 @@ export default function ContactSection({
                     type="tel"
                     name="phone"
                     value={contactFormState.phone}
-                    onChange={onFieldChange}
+                    onChange={handleFieldChange}
                     required
                     minLength={10}
                     maxLength={10}
@@ -129,7 +134,7 @@ export default function ContactSection({
                     type="email"
                     name="email"
                     value={contactFormState.email}
-                    onChange={onFieldChange}
+                    onChange={handleFieldChange}
                     required
                     placeholder="you@company.com"
                   />
@@ -143,6 +148,8 @@ export default function ContactSection({
                   <input
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     name="address"
+                    value={contactFormState.address}
+                    onChange={handleFieldChange}
                     required
                     placeholder="Street address, city, state, ZIP"
                   />
@@ -157,7 +164,7 @@ export default function ContactSection({
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     name="service"
                     value={contactFormState.service}
-                    onChange={onFieldChange}
+                    onChange={handleFieldChange}
                   >
                     {services[0].bullets.map((service) => (
                       <option key={service} value={service}>
@@ -175,7 +182,8 @@ export default function ContactSection({
                   <select
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     name="bestTimeToCall"
-                    defaultValue=""
+                    value={contactFormState.bestTimeToCall}
+                    onChange={handleFieldChange}
                   >
                     <option value="" disabled>
                       Select a time window
@@ -195,7 +203,9 @@ export default function ContactSection({
                   <input
                     className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                     type="date"
-                    name="preferredServiceDate"
+                    name="preferredDate"
+                    value={contactFormState.preferredDate}
+                    onChange={handleFieldChange}
                   />
                 </div>
               </div>
@@ -209,7 +219,7 @@ export default function ContactSection({
                   className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400 focus:border-blue-500 focus:bg-white focus:ring-2 focus:ring-blue-100"
                   name="message"
                   value={contactFormState.message}
-                  onChange={onFieldChange}
+                  onChange={handleFieldChange}
                   rows={5}
                   placeholder="Tell us what's going on — the more detail, the better."
                 />
@@ -228,6 +238,7 @@ export default function ContactSection({
                     accept="image/*"
                     multiple
                     className="hidden"
+                    onChange={handleFieldChange}
                   />
                 </label>
                 <span className="text-xs text-slate-400">
@@ -241,6 +252,8 @@ export default function ContactSection({
                   <input
                     type="checkbox"
                     name="registerForUpdates"
+                    checked={contactFormState.registerForUpdates}
+                    onChange={handleFieldChange}
                     className="h-4 w-4 accent-blue-600"
                   />
                   <span className="font-semibold">
@@ -248,7 +261,6 @@ export default function ContactSection({
                   </span>
                 </label>
               </div>
-
               {/* Footer */}
               <div className="mt-6 flex flex-wrap items-center justify-between gap-3">
                 <button
@@ -258,7 +270,6 @@ export default function ContactSection({
                 >
                   {isSending ? 'Sending…' : 'Request Service →'}
                 </button>
-
                 <p className="text-sm text-slate-400">
                   Prefer to talk?{' '}
                   <a

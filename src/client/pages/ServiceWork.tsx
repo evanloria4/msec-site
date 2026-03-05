@@ -16,8 +16,13 @@ type ContactFormState = {
   name: string;
   phone: string;
   email: string;
+  address: string;
   service: string;
+  bestTimeToCall: string;
+  preferredDate: string;
   message: string;
+  photos: FileList | null;
+  registerForUpdates: boolean;
 };
 
 type ToastType = 'success' | 'error';
@@ -56,23 +61,18 @@ export default function ServiceWork() {
     ],
     []
   );
-  const locations: Location[] = useMemo(
-    () => [
-      { name: 'Covington, LA' },
-      { name: 'Hammond, LA' },
-      { name: 'Denham Springs, LA' },
-      { name: 'Walker, LA' },
-      { name: 'Livingston, LA' },
-      { name: 'Baton Rouge, LA' },
-    ],
-    []
-  );
+
   const [contactFormState, setContactFormState] = useState<ContactFormState>({
     name: '',
     phone: '',
     email: '',
-    service: services[0]?.title ?? 'Electrical Contracting',
+    address: '',
+    service: services[0]?.title ?? 'Breaker Tripping Issues',
+    bestTimeToCall: '',
+    preferredDate: '',
+    photos: null,
     message: '',
+    registerForUpdates: false,
   });
   // State to manage contact form submission status
   const [isSending, setIsSending] = useState(false);
@@ -83,16 +83,37 @@ export default function ServiceWork() {
   } | null>(null);
   // Ref to store the toast timer ID for cleanup
   const toastTimer = useRef<number | null>(null);
+  // Handle changes to contact form fields, including text inputs, checkboxes, and file uploads
   function handleContactFieldChange(
     event: React.ChangeEvent<
       HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
     >
   ) {
-    const { name, value } = event.target;
-    setContactFormState((previousState) => ({
-      ...previousState,
-      [name]: value,
-    }));
+    // Grab the element that triggered the change event
+    const target = event.target;
+    // Check the type of input to handle checkboxes and file uploads differently since they don't use the value property in the same way as text inputs
+    if (target instanceof HTMLInputElement) {
+      if (target.type === 'checkbox') {
+        console.log('Checkbox change detected:', target.name, target.checked);
+        // Set the state for registerForUpdates to the checked status of the checkbox
+        setContactFormState((prev) => ({
+          ...prev,
+          [target.name]: target.checked,
+        }));
+        return;
+      }
+      if (target.type === 'file') {
+        console.log('File input change detected:', target.name, target.files);
+        // Set the state for photos to the list of files selected by the user
+        setContactFormState((prev) => ({
+          ...prev,
+          [target.name]: target.files,
+        }));
+        return;
+      }
+    }
+    console.log('Input change detected:', target.name, target.value);
+    setContactFormState((prev) => ({ ...prev, [target.name]: target.value }));
   }
 
   /* Function to show toast notifications
@@ -122,8 +143,13 @@ export default function ServiceWork() {
         name: '',
         phone: '',
         email: '',
-        service: services[0]?.title ?? 'Electrical Contracting',
+        address: '',
+        service: services[0]?.title ?? 'Breaker Tripping Issues',
+        bestTimeToCall: '',
+        preferredDate: '',
+        photos: null,
         message: '',
+        registerForUpdates: false,
       });
     } catch (error) {
       console.error('Error submitting contact form:', error);
@@ -139,7 +165,7 @@ export default function ServiceWork() {
     <ContactSection
       services={services}
       contactFormState={contactFormState}
-      onFieldChange={handleContactFieldChange}
+      handleFieldChange={handleContactFieldChange}
       onFormSubmit={handleContactFormSubmit}
       toast={toast}
       onDismissToast={() => setToast(null)}
