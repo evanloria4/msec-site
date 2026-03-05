@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import ServiceWork from './pages/ServiceWork';
+import NewConstruction from './pages/NewConstruction';
 
 type ContactFormState = {
   name: string;
@@ -25,13 +26,14 @@ export default function App() {
   }
 
   return (
-    <>
+    <div className="flex min-h-screen flex-col bg-slate-100">
       <Navbar />
-      <main>
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/service-work" element={<ServiceWork />} />
+          <Route path="new-construction" element={<NewConstruction />} />
         </Routes>
       </main>
       {/* Footer (kept in App for now) */}
@@ -45,6 +47,6 @@ export default function App() {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 }
