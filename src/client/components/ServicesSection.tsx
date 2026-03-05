@@ -44,7 +44,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                     key={bullet}
                     className="flex items-start gap-2 text-sm text-slate-600"
                   >
-                    <span className="mt-0.5 text-blue-500 font-bold">—</span>
+                    <span className="-mt-0.5 text-blue-500 font-bold">—</span>
                     {bullet}
                   </li>
                 ))}
