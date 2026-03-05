@@ -79,7 +79,7 @@ export default function ContactSection({
         <div className="mx-auto max-w-5xl px-4">
           {/* Header */}
           <div className="mb-8">
-            <p className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600">
+            <p className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-blue-600">
               <span className="inline-block h-0.5 w-4 rounded bg-blue-600" />
               Electrical Services
             </p>
