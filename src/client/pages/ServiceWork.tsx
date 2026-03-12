@@ -109,8 +109,8 @@ export default function ServiceWork() {
         const existingFiles = contactFormState.photos
           ? Array.from(contactFormState.photos)
           : [];
-        // Merge newFiles with existingFiles
-        const merged = [...existingFiles, ...newFiles];
+        // Merge newFiles with existingFiles, capped at 5
+        const merged = [...existingFiles, ...newFiles].slice(0, 5);
 
         // Convert back to a DataTransfer FileList
         const dt = new DataTransfer();

@@ -1,4 +1,5 @@
 import React from 'react';
+import PhotoThumbnail from './PhotoThumbnail';
 
 type ToastType = 'success' | 'error';
 
@@ -294,28 +295,19 @@ export default function NewContact({
                   />
                 </label>
                 <span className="text-xs text-slate-400">
-                  PNG, JPG — multiple files allowed
+                  PNG, JPG — up to 5 photos
                 </span>
               </div>
               {/* Selected files preview */}
               {contactFormState.photos &&
                 contactFormState.photos.length > 0 && (
-                  <div className="mt-2 flex flex-wrap gap-2">
+                  <div className="mt-3 flex flex-wrap gap-2">
                     {Array.from(contactFormState.photos).map((file) => (
-                      <span
+                      <PhotoThumbnail
                         key={file.name}
-                        className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1 text-xs font-semibold text-slate-600"
-                      >
-                        📎 {file.name}
-                        <button
-                          type="button"
-                          onClick={() => handleRemovePhoto(file.name)}
-                          className="ml-1 text-slate-400 hover:text-red-500 transition"
-                          aria-label={`Remove ${file.name}`}
-                        >
-                          ✕
-                        </button>
-                      </span>
+                        file={file}
+                        onRemove={() => handleRemovePhoto(file.name)}
+                      />
                     ))}
                   </div>
                 )}
