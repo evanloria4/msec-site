@@ -243,7 +243,6 @@ export default function ContactSection({
                     </option>
                     <option value="Morning">Morning (8am–12pm)</option>
                     <option value="Afternoon">Afternoon (12pm–4pm)</option>
-                    <option value="Evening">Evening (4pm–7pm)</option>
                     <option value="Anytime">Anytime</option>
                   </select>
                 </div>
@@ -258,7 +257,11 @@ export default function ContactSection({
                     type="date"
                     name="preferredDate"
                     value={contactFormState.preferredDate}
-                    min={new Date(Date.now() + 86400000).toISOString().split('T')[0]}
+                    min={
+                      new Date(Date.now() + 86400000)
+                        .toISOString()
+                        .split('T')[0]
+                    }
                     onChange={handleFieldChange}
                   />
                 </div>
