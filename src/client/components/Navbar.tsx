@@ -29,25 +29,26 @@ export default function Navbar() {
                 Mechanical Specialties LLC
               </div>
               <div className="text-xs text-blue-200">
-                Electrical Contracting & Mechanical Services
+                Electrical Contracting
               </div>
             </div>
           </NavLink>
 
           {/* Desktop nav */}
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-2 md:flex">
             <NavLink to="/" className={linkClass}>
               Home
             </NavLink>
             <NavLink to="/about" className={linkClass}>
               About MSEC
             </NavLink>
-            <NavLink to="/service-work" className={linkClass}>
-              Service Work
-            </NavLink>
-            <NavLink to="/new-construction" className={linkClass}>
-              New Construction
-            </NavLink>
+            <span className="mx-2 h-4 w-px bg-blue-400" />
+            <a
+              href="tel:+19852495765"
+              className="text-sm font-semibold text-white/90 transition hover:text-white"
+            >
+              (985) 249-5765
+            </a>
           </nav>
 
           {/* Mobile hamburger */}
