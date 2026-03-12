@@ -16,6 +16,9 @@ export default function ContactBanner() {
         <p className="mt-2 text-sm text-blue-200">
           Reach out by phone or email and we'll be in touch.
         </p>
+        <p className="mt-2 text-sm font-semibold text-blue-200">
+          Office Hours: Mon–Fri, 7:00 AM – 4:30 PM
+        </p>
 
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <a
