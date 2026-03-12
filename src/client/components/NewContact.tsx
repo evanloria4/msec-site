@@ -263,6 +263,9 @@ export default function NewContact({
                     }
                     onChange={handleFieldChange}
                   />
+                  <p className="text-xs text-slate-400">
+                    We'll do our best to accommodate your preferred date — weekdays only. Dates are subject to availability and not guaranteed.
+                  </p>
                 </div>
               </div>
 
