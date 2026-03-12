@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 type Service = {
   title: string;
@@ -27,7 +28,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
           {services.map((service) => (
             <div
               key={service.title}
-              className="rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+              className="flex flex-col rounded-2xl border border-slate-200 bg-slate-50 p-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
             >
               <div className="mb-4 flex items-center gap-3">
                 <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue-600 text-white">
@@ -38,7 +39,7 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                 </div>
               </div>
 
-              <ul className="space-y-2">
+              <ul className="grow space-y-2">
                 {service.bullets.map((bullet) => (
                   <li
                     key={bullet}
@@ -49,6 +50,15 @@ export default function ServicesSection({ services }: ServicesSectionProps) {
                   </li>
                 ))}
               </ul>
+
+              <div className="mt-5 flex justify-end">
+                <Link
+                  to={service.title === 'Service Work' ? '/service-work' : '/new-construction'}
+                  className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm transition hover:bg-orange-400"
+                >
+                  {service.title === 'Service Work' ? 'Request Service' : 'New Construction'}
+                </Link>
+              </div>
             </div>
           ))}
         </div>

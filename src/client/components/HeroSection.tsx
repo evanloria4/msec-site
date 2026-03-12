@@ -30,21 +30,6 @@ export default function HeroSection({}: HeroSectionProps) {
               <br />
               25+ Years Serving Southeast Louisiana
             </p>
-
-            <div className="mt-3 flex flex-wrap items-center gap-3">
-              <Link
-                to="/service-work"
-                className="rounded-md bg-orange-500 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm transition hover:bg-orange-400"
-              >
-                Schedule Service
-              </Link>
-              <Link
-                to="/new-construction"
-                className="rounded-md border border-white/50 bg-white/10 px-4 py-2 text-[12px] font-extrabold text-white shadow-sm backdrop-blur-sm transition hover:bg-white/20"
-              >
-                New Construction
-              </Link>
-            </div>
           </div>
         </div>
       </div>
