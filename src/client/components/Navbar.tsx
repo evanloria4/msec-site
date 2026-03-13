@@ -95,20 +95,6 @@ export default function Navbar() {
               <NavLink to="/about" className={linkClass} onClick={closeMenu}>
                 About MSEC
               </NavLink>
-              <NavLink
-                to="/service-work"
-                className={linkClass}
-                onClick={closeMenu}
-              >
-                Service Work
-              </NavLink>
-              <NavLink
-                to="/new-construction"
-                className={linkClass}
-                onClick={closeMenu}
-              >
-                New Construction
-              </NavLink>
             </div>
           </nav>
         )}
