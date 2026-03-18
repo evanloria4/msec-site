@@ -23,7 +23,6 @@ export default function Navbar() {
             className="flex items-center gap-3"
             onClick={closeMenu}
           >
-            <div className="h-9 w-9 rounded-xl bg-slate-100 border border-slate-200" />
             <div>
               <div className="font-extrabold leading-tight tracking-tight text-white">
                 Mechanical Specialties LLC

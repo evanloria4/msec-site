@@ -1,4 +1,5 @@
 import React from 'react';
+import MsecLogo from '../assets/logo.png';
 
 export default function AboutSection() {
   return (
@@ -46,7 +47,11 @@ export default function AboutSection() {
             </div>
           </div>
 
-          {/* Right: photo placeholder */}
+          {/* Right: logo + photo placeholder */}
+          <div>
+            <div className="mb-4 flex justify-center">
+              <img src={MsecLogo} alt="MSEC Logo" className="h-32 w-auto" />
+            </div>
           <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
             <div className="aspect-[16/10] w-full rounded-xl border border-dashed border-slate-300 bg-slate-50 flex flex-col items-center justify-center gap-1.5">
               <div className="text-sm font-bold text-slate-700">
@@ -65,6 +70,7 @@ export default function AboutSection() {
                 />
               ))}
             </div>
+          </div>
           </div>
         </div>
       </div>
