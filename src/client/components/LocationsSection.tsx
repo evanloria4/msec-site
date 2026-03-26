@@ -1,8 +1,11 @@
 import React from 'react';
+import ServiceAreaMap from './ServiceAreaMap';
 
 type Location = {
   name: string;
   note?: string;
+  lat: number;
+  lng: number;
 };
 
 type LocationsSectionProps = {
@@ -29,10 +32,13 @@ export default function LocationsSection({ locations }: LocationsSectionProps) {
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
           {/* Map */}
-          <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:col-span-2">
-            <div className="flex h-64 items-center justify-center rounded-xl border border-dashed border-slate-300 bg-slate-50 text-sm font-bold text-slate-400">
-              Map Coming Soon
+          <div className="flex flex-col md:col-span-2">
+            <div className="overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
+              <ServiceAreaMap locations={locations} />
             </div>
+            <p className="mt-2 px-1 text-xs text-slate-400">
+              * Displayed service areas are approximate. Contact us to confirm availability in your area.
+            </p>
           </div>
 
           {/* Locations list */}
