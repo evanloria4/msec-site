@@ -160,6 +160,16 @@ export default function NewConstruction() {
     event.preventDefault();
     if (isSending) return;
 
+    if (contactFormState.preferredDate) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const selected = new Date(contactFormState.preferredDate + 'T00:00:00');
+      if (selected <= today) {
+        showToast('error', 'Please select a future date for your service.');
+        return;
+      }
+    }
+
     setIsSending(true);
     const formData = new FormData();
     formData.append('name', contactFormState.name);
