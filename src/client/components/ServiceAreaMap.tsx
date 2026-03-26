@@ -54,12 +54,17 @@ export default function ServiceAreaMap({ locations }: ServiceAreaMapProps) {
         .addTo(map);
 
       const bounds: [number, number][] = [];
+      const tooltips: ReturnType<(typeof leaflet)['tooltip']>[] = [];
+      const markers: ReturnType<(typeof leaflet)['circleMarker']>[] = [];
+      const circles: ReturnType<(typeof leaflet)['circle']>[] = [];
+      const LABEL_MIN_ZOOM = 8;
+      const MARKER_MIN_ZOOM = 6;
 
       locations.forEach((loc) => {
         bounds.push([loc.lat, loc.lng]);
 
         // Service area circle (roughly 8-mile radius)
-        leaflet
+        const circle = leaflet
           .circle([loc.lat, loc.lng], {
             radius: 12000,
             color: '#2563eb',
@@ -69,6 +74,8 @@ export default function ServiceAreaMap({ locations }: ServiceAreaMapProps) {
             opacity: 0.5,
           })
           .addTo(map);
+
+        circles.push(circle);
 
         // Custom blue marker
         const marker = leaflet
@@ -81,6 +88,8 @@ export default function ServiceAreaMap({ locations }: ServiceAreaMapProps) {
           })
           .addTo(map);
 
+        markers.push(marker);
+
         marker.bindPopup(
           `<div style="font-family:sans-serif;font-size:13px;font-weight:700;color:#1e293b">${loc.name}</div>` +
             (loc.note
@@ -89,7 +98,7 @@ export default function ServiceAreaMap({ locations }: ServiceAreaMapProps) {
         );
 
         // City label
-        leaflet
+        const tooltip = leaflet
           .tooltip({
             permanent: true,
             direction: loc.labelDirection ?? 'top',
@@ -99,7 +108,27 @@ export default function ServiceAreaMap({ locations }: ServiceAreaMapProps) {
           .setContent(loc.name.replace(', LA', ''))
           .setLatLng([loc.lat, loc.lng])
           .addTo(map);
+
+        tooltips.push(tooltip);
       });
+
+      const updateVisibility = () => {
+        const zoom = map.getZoom();
+        tooltips.forEach((tooltip) => {
+          const el = tooltip.getElement();
+          if (el) el.style.visibility = zoom >= LABEL_MIN_ZOOM ? 'visible' : 'hidden';
+        });
+        markers.forEach((marker) => {
+          const el = marker.getElement() as HTMLElement | undefined;
+          if (el) el.style.visibility = zoom >= MARKER_MIN_ZOOM ? 'visible' : 'hidden';
+        });
+        circles.forEach((circle) => {
+          const el = circle.getElement() as HTMLElement | undefined;
+          if (el) el.style.visibility = zoom >= MARKER_MIN_ZOOM ? 'visible' : 'hidden';
+        });
+      };
+
+      map.on('zoomend', updateVisibility);
 
       if (bounds.length > 0) {
         // Autodetect where the map should set view
