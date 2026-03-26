@@ -12,6 +12,8 @@ type Service = {
 type Location = {
   name: string;
   note?: string;
+  lat: number;
+  lng: number;
 };
 
 export default function Home() {
@@ -50,12 +52,12 @@ export default function Home() {
   );
   const locations: Location[] = useMemo(
     () => [
-      { name: 'Covington, LA' },
-      { name: 'Hammond, LA' },
-      { name: 'Denham Springs, LA' },
-      { name: 'Walker, LA' },
-      { name: 'Livingston, LA' },
-      { name: 'Baton Rouge, LA' },
+      { name: 'Covington, LA', lat: 30.4735, lng: -90.1009 },
+      { name: 'Hammond, LA', lat: 30.5044, lng: -90.4612 },
+      { name: 'Denham Springs, LA', lat: 30.4882, lng: -90.9578 },
+      { name: 'Walker, LA', lat: 30.4960, lng: -90.8625 },
+      { name: 'Livingston, LA', lat: 30.5073, lng: -90.7540 },
+      { name: 'Baton Rouge, LA', lat: 30.4515, lng: -91.1871 },
     ],
     []
   );
