@@ -6,6 +6,8 @@ type Location = {
   note?: string;
   lat: number;
   lng: number;
+  labelDirection?: 'top' | 'bottom' | 'left' | 'right';
+  labelOffset?: [number, number];
 };
 
 type LocationsSectionProps = {

@@ -6,6 +6,8 @@ type Location = {
   note?: string;
   lat: number;
   lng: number;
+  labelDirection?: 'top' | 'bottom' | 'left' | 'right';
+  labelOffset?: [number, number];
 };
 
 type ServiceAreaMapProps = {
@@ -90,8 +92,8 @@ export default function ServiceAreaMap({ locations }: ServiceAreaMapProps) {
         leaflet
           .tooltip({
             permanent: true,
-            direction: 'top',
-            offset: [0, -10],
+            direction: loc.labelDirection ?? 'top',
+            offset: loc.labelOffset ?? [0, -10],
             className: 'map-city-label',
           })
           .setContent(loc.name.replace(', LA', ''))
