@@ -1,6 +1,6 @@
 // src/client/App.tsx
-import React, { useMemo, useRef, useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -25,9 +25,6 @@ type ContactFormState = {
 };
 
 export default function App() {
-  // Set state for turnstile token and contact form
-  const [turnstileToken, setTurnstileToken] = useState<string>('');
-
   function scrollToSection(sectionId: string) {
     document
       .getElementById(sectionId)
