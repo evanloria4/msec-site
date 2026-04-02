@@ -1,6 +1,14 @@
 // src/client/App.tsx
-import React, { useMemo, useRef, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useMemo, useRef, useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
 import Navbar from './components/Navbar';
 import MsecLogo from './assets/logo.png';
 import Home from './pages/Home';
@@ -30,6 +38,7 @@ export default function App() {
     <div className="flex min-h-screen flex-col bg-slate-100">
       <Navbar />
       <main className="flex-1">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
